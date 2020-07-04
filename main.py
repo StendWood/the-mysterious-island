@@ -12,11 +12,15 @@ import variables
 # Function
 # Game flow
 def adventure():
+    """
+        Principal gameflow
+    """
+    
     # Show the main menu
     mm.main_menu()
     mm.menu_chooser()
-    ma.new_map()
-    ma.map_printer()
+    # ma.new_map()
+    # ma.map_printer()
 
 if __name__ == "__main__":
     adventure()
