@@ -22,7 +22,7 @@ def welcome_screen():
     print("░█░ █▀█ ██▄   █░▀░█ ░█░ ▄█ ░█░ ██▄ █▀▄ █ █▄█ █▄█ ▄█   █ ▄█ █▄▄ █▀█ █░▀█ █▄▀\n")
 
 # Menu
-def menu_chooser():
+def main_menu_chooser():
     """
         Let the player choose in the menu
     """
@@ -68,3 +68,5 @@ def main_menu():
 
     # ASCII Art for the game
     welcome_screen()
+    # Main menu
+    main_menu_chooser()

@@ -3,4 +3,6 @@
 # Imports
 
 # Variables Declaration
+# Map
 island_map = []
+

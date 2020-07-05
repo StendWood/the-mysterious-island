@@ -4,7 +4,8 @@
 import os
 import sys
 
-# 🏝️
+# √ done mysterious place
+# φ mysterious place
 
 #FUNCTION
 # Clear the console for sexier print

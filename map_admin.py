@@ -32,3 +32,12 @@ def map_printer():
     # Print map
     for line in variables.island_map:
         print("".join(line))
+
+
+def map_reveal():
+    """
+        Reveal the Skull Door and let the player pass through
+    """
+    # Si nombre de keys = 3
+    variables.island_map[1][21] = "∩"
+    variables.island_map[2][96] = "Skull Door"
