@@ -3,12 +3,14 @@
 # Imports
 import random
 import toolbox as tb
+import sys
 
-# Other code
-import map_admin
+# Extra code
 import variables
+import game_data as gdat
+import leaderboard as lb
 
-# Functions
+# FUNCTIONS
 # Show the welcome screen
 def welcome_screen():
     """
@@ -18,7 +20,7 @@ def welcome_screen():
     # Clear the console
     tb.clear()
     # Welcome Ascii art
-    print("▀█▀ █░█ █▀▀   █▀▄▀█ █▄█ █▀ ▀█▀ █▀▀ █▀█ █ █▀█ █░█ █▀   █ █▀ █░░ ▄▀█ █▄░█ █▀▄")
+    print("\n▀█▀ █░█ █▀▀   █▀▄▀█ █▄█ █▀ ▀█▀ █▀▀ █▀█ █ █▀█ █░█ █▀   █ █▀ █░░ ▄▀█ █▄░█ █▀▄")
     print("░█░ █▀█ ██▄   █░▀░█ ░█░ ▄█ ░█░ ██▄ █▀▄ █ █▄█ █▄█ ▄█   █ ▄█ █▄▄ █▀█ █░▀█ █▄▀\n")
 
 # Menu
@@ -27,23 +29,25 @@ def main_menu_chooser():
         Let the player choose in the menu
     """
 
+    # Print the menu
     print("\t\t\t1 - New Game")
     print("\t\t\t2 - Load Game")
     print("\t\t\t3 - Leaderboard")
     print("\t\t\t4 - Quit\n")
+    # Check the player choice
     player_choice = menu_choice()
-    if player_choice == 1:
+    if player_choice == "1":
         # Start the game
-        pass
-    elif player_choice == 2:
+        gdat.new_game()
+    elif player_choice == "2":
         # Load a game if it exist
-        pass
-    elif player_choice == 3:
+        gdat.load_game()
+    elif player_choice == "3":
         # Show the leaderboard
-        pass
+        lb.leaderboard()
     else:
         # Quit the game
-        pass
+        sys.exit()
 
 # Player menu choice
 def menu_choice():

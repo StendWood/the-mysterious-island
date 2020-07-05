@@ -6,3 +6,6 @@
 # Map
 island_map = []
 
+
+# Player
+player_name = ""

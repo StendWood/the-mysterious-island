@@ -4,10 +4,11 @@
 import random
 
 
-# Other code
+# Extra code
+import variables
 import main_menu as mm
 import map_admin as ma
-import variables
+import player_actions as pa
 
 # Function
 # Game flow
@@ -17,10 +18,11 @@ def adventure():
     """
     
     # Show the main menu
-    # mm.main_menu()
-    ma.new_map()
+    mm.main_menu()
+    # Print the map after the main menu
     ma.map_printer()
-    
+    # Let the player move
+    pa.player_actions()
 
 if __name__ == "__main__":
     adventure()
