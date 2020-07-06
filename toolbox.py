@@ -59,3 +59,4 @@ def rules_stories():
     print("\tI wish you good luck.\n")
     # Let the player continue
     input("\t\t\t\t\tPress Enter to continue")
+    clear()

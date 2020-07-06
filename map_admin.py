@@ -49,6 +49,69 @@ def map_printer():
     for line in variables.island_map:
         print("".join(line))
 
+# Map Tiles
+map_tiles = {
+                "▲" :
+                            [
+                                "Mountain",    #  0 - Name
+                                False,  # 1 - If player can pass through
+                            ],
+                "↑" :
+                            [
+                                "Trees",    # 0 - Name
+                                False,  # 1 - If player can pass through
+                            ],
+                "|" :
+                            [
+                                "Shoreline",    # 0 - Name
+                                False,  # 1 - If player can pass through
+                            ],
+                "_" :
+                            [
+                                "Shoreline",    # 0 - Name
+                                False,  # 1 - If player can pass through
+                            ],
+                "░" :
+                            [
+                                "Sea",    # 0 - Name
+                                False,  # 1 - If player can pass through
+                            ],
+                "~" :
+                            [
+                                "River",    # 0 - Name
+                                False,  # 1 - If player can pass through
+                            ],
+                "φ" :
+                            [
+                                "Mysterious Places",    # 0 - Name
+                                True,  # 1 - If player can pass through
+                                (      # 2 - Position tuple
+                                    [27, 42],   # 0 - Position of the first challenge
+                                    [24, 8],    # 1 - Position of the second challenge
+                                    [5, 64]     # 2 - Position of the third challenge
+                                )    
+                            ],
+                "√" :
+                            [
+                                "Mysteries Solved",    # 0 - Symbol
+                                True,  # 1 - If player can pass through
+                            ],
+                "¤" :
+                            [
+                                "Items stashes",    # 0 - Symbol
+                                True,  # 1 - If player can pass through
+                            ],
+                "∩" :
+                            [
+                                "Skull Door",    # 0 - Symbol
+                                True,  # 1 - If player can pass through
+                            ],
+                " " :
+                            [
+                                "Sand or Dirt",    # 0 - Symbol
+                                True,  # 1 - If player can pass through
+                            ],
+}
 
 def map_reveal():
     """

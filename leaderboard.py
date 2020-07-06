@@ -14,6 +14,6 @@ def leaderboard():
     mm.main_menu()
 
 # Leaderboard Data
-leaderboard_data = {
-
-}
+leaderboard_data = [
+                    []
+]

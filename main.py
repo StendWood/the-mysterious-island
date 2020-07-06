@@ -1,8 +1,6 @@
 # coding: utf-8
 
 # Imports
-import random
-
 
 # Extra code
 import variables
@@ -22,7 +20,7 @@ def adventure():
     # Print the map after the main menu
     ma.map_printer()
     # Let the player move
-    pa.player_actions()
+    pa.player_actions("Actions Menu")
 
 if __name__ == "__main__":
     adventure()

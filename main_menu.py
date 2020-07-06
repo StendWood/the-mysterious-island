@@ -35,7 +35,7 @@ def main_menu_chooser():
     print("\t\t\t3 - Leaderboard")
     print("\t\t\t4 - Quit\n")
     # Check the player choice
-    player_choice = menu_choice()
+    player_choice = menu_choice("Main Menu")
     if player_choice == "1":
         # Start the game
         gdat.new_game()
@@ -50,18 +50,18 @@ def main_menu_chooser():
         sys.exit()
 
 # Player menu choice
-def menu_choice():
+def menu_choice(menu_name):
     """
         Process the player choice
     """
 
     # Valid string
-    valid = "1234"
+    valid = variables.menu_data[menu_name][0]
     # Ask player choice
     choice = input("\t\tChoose what you want to do : ")
     while not choice.isdigit() or choice not in valid :
         # Player choice is not a digit or not in valid
-        choice = input("\t\tChoose from 1 - 4 : ")
+        choice = input(f"\t\tChoose from {variables.menu_data[menu_name][0][0]} - {variables.menu_data[menu_name][0][-1]} : ")
     return choice
 
 # Call the main menu
