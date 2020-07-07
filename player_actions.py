@@ -10,6 +10,7 @@ import toolbox as tb
 import game_data as gdat
 import variables
 import player_move as pm
+import inventory_items as inv
 
 # FUNCTIONS
 # Let the player choose his action
@@ -20,20 +21,29 @@ def player_actions(action_name):
 
     # Print the possible actions
     print(f"\n1 - {variables.menu_data[action_name][1]}     2- {variables.menu_data[action_name][2]}      3 - {variables.menu_data[action_name][3]}       4- {variables.menu_data[action_name][4]}\n")
+    # Ask what the player wants to do
     player_choice = mm.menu_choice(action_name)
     # Use the player choice
     if player_choice == "1":
+        # Player input is 1
         pm.player_movement("Move Menu")
-        # Check the tile
     elif player_choice == "2":
-        print("Open the inventory windows")
-        print("You check your inventory")
+        # Plauer input is 2
+        #Show the inventory
+        inv.inv_show()
+        inv.use_item("Water bottle")
     elif player_choice == "3":
+        # Player input is 3
+        # Launch the sleep function and ask a number the player wants to sleep
         player_sleep()
+        # Print the map
         ma.map_printer()
+        # Return to the actions menu
         player_actions("Actions Menu")
     else:
-        print("You saved")
+        # The player choosed to save and thus quit the game
+        gdat.save_game()
+        # Exit the programm
         sys.exit()
 
 # Sleep

@@ -76,7 +76,7 @@ def move(player_position, directions):
             # Change player position
             gdat.game_data["player"]["position"][0] += 1
     # Replace the tile where the player go
-    variables.island_map[player_position[0]][player_position[1]] = "𓀠"
+    variables.island_map[player_position[0]][player_position[1]] = "Ø"
     # Check if the player is on a tile with an event
     tile_checker()
 
@@ -89,7 +89,7 @@ def move_checker(next_pos):
     if ma.map_tiles[next_pos][1] == True:
         # The player can move on the next position
         # Replace the tile where the player is
-        variables.island_map[gdat.game_data["player"]["position"][0]][gdat.game_data["player"]["position"][1]] = " "
+        variables.island_map[gdat.game_data["player"]["position"][0]][gdat.game_data["player"]["position"][1]] = next_pos
         # Increment the movement score
         gdat.game_data["player"]["movements counter"]+=1
         # Energy decay
@@ -110,7 +110,7 @@ def tile_checker():
     """
 
     # Check for the mysterious places tiles
-    if gdat.game_data["player"]["position"] in ma.map_tiles["φ"][2]:
+    if gdat.game_data["player"]["position"] in ma.map_tiles["φ"][4]:
         # The player position is on a challenge
         tb.clear()
         print("You entered a Challenge")
