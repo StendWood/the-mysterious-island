@@ -6,11 +6,6 @@
 # Map
 island_map = []
 
-
-# Player
-player_name = ""
-player_position = [26, 58]    #[ y, x]
-
 # Menu actions
 menu_data = {
                 "Main Menu" : # Menu Name

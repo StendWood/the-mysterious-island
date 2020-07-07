@@ -8,6 +8,7 @@ import sys
 import variables
 import toolbox as tb
 import main_menu as mm
+import game_data as gdat
 
 #FUNCTIONS
 # Clear the console for sexier print
@@ -29,10 +30,10 @@ def ask_player_name():
     # Clear the console
     mm.welcome_screen()
     # Ask the player name
-    variables.player_name = input("What's you name fellow adventurer ? ")
-    while variables.player_name == "":
+    gdat.game_data["player"]["name"] = input("What's you name fellow adventurer ? ")
+    while gdat.game_data["player"]["name"] == "":
         # If the player name is empty ask again
-        variables.player_name = input("Lost your tongue ? ")
+        gdat.game_data["player"]["name"] = input("Lost your tongue ? ")
 
 # Rules and story
 def rules_stories():
@@ -45,7 +46,7 @@ def rules_stories():
     # Print the story
     print("You wake up on a beach, not sure where. The ship is gone but at least you have all your equipments.")
     print("You look inside your backpack and find an old and wet parchment.\n\n")
-    print(f"\tWelcome \u001b[1m\u001b[83m{variables.player_name}\u001b[0m,\n")    # Bold text \033[1m
+    print(f"\tWelcome \u001b[1m\u001b[83m{gdat.game_data['player']['name']}\u001b[0m,\n")    # Bold text \033[1m
     print(f"\tYou lost your way ? Do not worry, what the ocean takes, this island can give.\n")
     print(f"\tYou'll need to find your way to three \033[91mMysterious Places\033[00m.")
     print("\tThree keys you must find and win : ")
@@ -60,3 +61,31 @@ def rules_stories():
     # Let the player continue
     input("\t\t\t\t\tPress Enter to continue")
     clear()
+
+# Death art
+def death_art():
+    """
+        Print the death art.
+    """
+
+    print("\u001b[1m               ...")
+    print("             ;::::;")
+    print("           ;::::; :;")
+    print("         ;:::::'   :;")
+    print("        ;:::::;     ;.")
+    print("       ,:::::'       ;           OOO\\")
+    print("       ::::::;       ;          OOOOO\\")
+    print("       ;:::::;       ;         OOOOOOOO")
+    print("      ,;::::::;     ;'         / OOOOOOO")
+    print("    ;:::::::::`. ,,,;.        /  / DOOOOOO")
+    print("  .';:::::::::::::::::;,     /  /     DOOOO")
+    print(" ,::::::;::::::;;;;::::;,   /  /        DOOO")
+    print(";`::::::`'::::::;;;::::: ,#/  /          DOOO")
+    print(":`:::::::`;::::::;;::: ;::#  /            DOOO")
+    print("::`:::::::`;:::::::: ;::::# /              DOO")
+    print("`:`:::::::`;:::::: ;::::::#/               DOO")
+    print(" :::`:::::::`;; ;:::::::::##                OO")
+    print(" ::::`:::::::`;::::::::;:::#                OO")
+    print(" `:::::`::::::::::::;'`:;::#                O")
+    print("  `:::::`::::::::;' /  / `:#")
+    print("   ::::::`:::::;'  /  /   `#\n")

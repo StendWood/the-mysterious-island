@@ -32,9 +32,21 @@ def load_game():
 
 # Game Data
 game_data = {
-                "player" : [
-                            variables.player_name,
-                            
-                            ]
+                "player" : 
+                            {
+                                "name" : "",
+                                "position" : [26, 58],
+                                "energy" : 100,
+                                "hydratation" : 100,
+                                "satiety" : 100,
+                                "movements counter" : 0,
+                                "actions counter" : 0,
+                                "keys" : 
+                                        [
+                                            False, # 0 - Bronze Key
+                                            False, # 1 - Silver Key
+                                            False  # 2 - Golden Key
+                                        ]
+                            }
 
 }

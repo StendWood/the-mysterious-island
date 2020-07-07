@@ -3,6 +3,7 @@
 # Imports
 import variables
 import toolbox as tb
+import game_data as gdat
 
 # FUNCTIONS
 # Load the a new map from the island_map.txt
@@ -20,6 +21,8 @@ def new_map():
         # Recreate a list
             x = [char for char in line]
             variables.island_map.append(x)
+    # Initialize the counters and status
+    status_counter()
 
 # Load the saved map when the player load a game
 def saved_map():
@@ -36,6 +39,8 @@ def saved_map():
         # Recreate a list
             x = [char for char in line]
             variables.island_map.append(x)
+    # Initialize the counters and status from the save file
+    status_counter()
 
 # Print the map for the player
 def map_printer():
@@ -45,10 +50,40 @@ def map_printer():
 
     # Console clear
     tb.clear()
+    # Status and counter refresh
+    status_counter()
     # Print map
     for line in variables.island_map:
         print("".join(line))
 
+# Initialize the counters
+def status_counter():
+    """
+        Initialize the status and counters after the map is loaded and the saved data (if any) is loaded
+    """
+
+    # Movements counter
+    variables.island_map[25][87] = str(gdat.game_data["player"]["movements counter"])
+    # Actions counter
+    variables.island_map[26][85] = str(gdat.game_data["player"]["actions counter"])
+    # Energy Status
+    variables.island_map[28][84] = str(gdat.game_data["player"]["energy"])
+    # Hydratation status
+    variables.island_map[29][89] = str(gdat.game_data["player"]["hydratation"])
+    # Satiety status
+    variables.island_map[30][85] = str(gdat.game_data["player"]["satiety"])
+
+# Skull door
+def map_reveal():
+    """
+        Reveal the Skull Door and let the player pass through
+    """
+    # Si nombre de keys = 3
+    variables.island_map[1][21] = "∩"
+    variables.island_map[2][96] = "Skull Door"
+
+
+# MAP DATA
 # Map Tiles
 map_tiles = {
                 "▲" :
@@ -112,11 +147,3 @@ map_tiles = {
                                 True,  # 1 - If player can pass through
                             ],
 }
-
-def map_reveal():
-    """
-        Reveal the Skull Door and let the player pass through
-    """
-    # Si nombre de keys = 3
-    variables.island_map[1][21] = "∩"
-    variables.island_map[2][96] = "Skull Door"

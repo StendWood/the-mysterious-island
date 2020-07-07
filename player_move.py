@@ -8,6 +8,7 @@ import main_menu as mm
 import map_admin as ma
 import player_actions as pa
 import toolbox as tb
+import game_data as gdat
 import variables
 
 
@@ -25,16 +26,16 @@ def player_movement(movement_name):
     # Move depending on the player choice
     if player_choice == "1":
         # Move North
-        move(variables.player_position, player_choice)
+        move(gdat.game_data["player"]["position"], player_choice)
     elif player_choice == "2":
         # Move West
-        move(variables.player_position, player_choice)
+        move(gdat.game_data["player"]["position"], player_choice)
     elif player_choice == "3":
         # Move East
-        move(variables.player_position, player_choice)
+        move(gdat.game_data["player"]["position"], player_choice)
     else:
         # Move south
-        move(variables.player_position, player_choice)
+        move(gdat.game_data["player"]["position"], player_choice)
 
 # Let the player move North
 def move(player_position, directions):
@@ -49,7 +50,7 @@ def move(player_position, directions):
         if move_checker(next_pos):
             # Player can move there
             # Change player position
-            variables.player_position[0] -= 1
+            gdat.game_data["player"]["position"][0] -= 1
     elif directions == "2":
         # The player chose to move WEST
         # Save the symbol of the next position
@@ -57,7 +58,7 @@ def move(player_position, directions):
         if move_checker(next_pos):
             # Player can move there
             # Change player position
-            variables.player_position[1] -= 1
+            gdat.game_data["player"]["position"][1] -= 1
     elif directions == "3":
         # The player chose to move EAST
         # Save the symbol of the next position
@@ -65,7 +66,7 @@ def move(player_position, directions):
         if move_checker(next_pos):
             # Player can move there
             # Change player position
-            variables.player_position[1] += 1
+            gdat.game_data["player"]["position"][1] += 1
     elif directions == "4":
         # The player chose to move SOUTH
         # Save the symbol of the next position
@@ -73,7 +74,7 @@ def move(player_position, directions):
         if move_checker(next_pos):
             # Player can move there
             # Change player position
-            variables.player_position[0] += 1
+            gdat.game_data["player"]["position"][0] += 1
     # Replace the tile where the player go
     variables.island_map[player_position[0]][player_position[1]] = "𓀠"
     # Check if the player is on a tile with an event
@@ -88,7 +89,17 @@ def move_checker(next_pos):
     if ma.map_tiles[next_pos][1] == True:
         # The player can move on the next position
         # Replace the tile where the player is
-        variables.island_map[variables.player_position[0]][variables.player_position[1]] = " "
+        variables.island_map[gdat.game_data["player"]["position"][0]][gdat.game_data["player"]["position"][1]] = " "
+        # Increment the movement score
+        gdat.game_data["player"]["movements counter"]+=1
+        # Energy decay
+        gdat.game_data["player"]["energy"]-=3
+        # Hydratation decay
+        gdat.game_data["player"]["hydratation"]-=2
+        # Satiety decay
+        gdat.game_data["player"]["satiety"]-=2
+        # Check if player is alive after the move
+        pa.check_vitals()
         # Validate the move
         return True
 
@@ -99,7 +110,7 @@ def tile_checker():
     """
 
     # Check for the mysterious places tiles
-    if variables.player_position in ma.map_tiles["φ"][2]:
+    if gdat.game_data["player"]["position"] in ma.map_tiles["φ"][2]:
         # The player position is on a challenge
         tb.clear()
         print("You entered a Challenge")
