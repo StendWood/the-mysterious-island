@@ -20,7 +20,7 @@ def player_actions(action_name):
     """
 
     # Print the possible actions
-    print(f"\n1 - {variables.menu_data[action_name][1]}     2- {variables.menu_data[action_name][2]}      3 - {variables.menu_data[action_name][3]}       4- {variables.menu_data[action_name][4]}\n")
+    print(f"\n1 - {ma.menu_data[action_name][1]}     2- {ma.menu_data[action_name][2]}      3 - {ma.menu_data[action_name][3]}       4- {ma.menu_data[action_name][4]}\n")
     # Ask what the player wants to do
     player_choice = mm.menu_choice(action_name)
     # Use the player choice
@@ -28,10 +28,11 @@ def player_actions(action_name):
         # Player input is 1
         pm.player_movement("Move Menu")
     elif player_choice == "2":
-        # Plauer input is 2
-        #Show the inventory
-        inv.inv_show()
-        inv.use_item("Water bottle")
+        # Player input is 2
+        # Clear the console
+        tb.clear()
+        # Let the player choose what he wants to do
+        inv.inventory_choices()
     elif player_choice == "3":
         # Player input is 3
         # Launch the sleep function and ask a number the player wants to sleep

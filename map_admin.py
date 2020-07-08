@@ -1,9 +1,13 @@
 # coding: utf-8
 
 # Imports
+import random
+
+# Extra code
 import variables
 import toolbox as tb
 import game_data as gdat
+import inventory_items as inv
 
 # FUNCTIONS
 # Load the a new map from the island_map.txt
@@ -54,17 +58,30 @@ def map_printer():
     # Status and counter refresh
     status_counter_init()
     # Print map
+    # Set the Y axis to 0
+    y = 0
     for line in variables.island_map:
         # Take the first item of the list
-        for character in line:
-            # Extract the first character of the list
-            if character in map_tiles:
-                # Check if the character is a tile
-                # Print the character with a color
-                print(f"{map_tiles[character][2]}{character}{map_tiles[character][3]}", end = "")
+        # Set the X axis to 0
+        x = 0
+        for symbol in line:
+            # Extract the first symbol of the list
+            if symbol in map_tiles:
+                # The symbol is a map tile
+                if gdat.game_data["player"]["position"][0] == y and gdat.game_data["player"]["position"][1] == x:
+                    # The position to print is equal to the position of the player
+                    # Print the player in place of the symbol
+                    print(f"{map_tiles['Ø'][2]}{'Ø'}{map_tiles['Ø'][3]}", end = "")
+                    x+=1
+                else:
+                    # Print the symbol with a color
+                    print(f"{map_tiles[symbol][2]}{symbol}{map_tiles[symbol][3]}", end = "")
+                    x+=1
             else:
-                # Print the normal character
-                print(character, end = "")
+                # Print the normal symbol
+                print(symbol, end = "")
+                x+=1
+        y+=1
 
 # Initialize the counters
 def status_counter_init():
@@ -113,10 +130,11 @@ def save_map():
     # Reset the counters and status before saving the map
     status_counter_reset()
     # Modify the save file
-    with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/map/saved_map.txt", "w", encoding="utf-8") as map:
+    with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/map/saved_map.txt", "w+", encoding="utf-8") as map:
         for line in variables.island_map:
             line = "".join(line)
             map.writelines(line)
+
 
 
 # MAP DATA
@@ -126,49 +144,49 @@ map_tiles = {
                             [
                                 "Mountain",    #  0 - Name
                                 False,  # 1 - If player can pass through
-                                "\u001b[38;5;102m",  # 2 - Color of the character
+                                "\u001b[38;5;102m",  # 2 - Color of the symbol
                                 "\u001b[0m"         # 3 - Reset color
                             ],
                 "↑" :
                             [
                                 "Trees",    # 0 - Name
                                 False,  # 1 - If player can pass through
-                                "\u001b[38;5;64m",  # 2 - Color of the character
+                                "\u001b[38;5;64m",  # 2 - Color of the symbol
                                 "\u001b[0m"         # 3 - Reset color
                             ],
                 "|" :
                             [
                                 "Shoreline",    # 0 - Name
                                 False,  # 1 - If player can pass through
-                                "",  # 2 - Color of the character
+                                "",  # 2 - Color of the symbol
                                 "",         # 3 - Reset color
                             ],
                 "_" :
                             [
                                 "Shoreline",    # 0 - Name
                                 False,  # 1 - If player can pass through
-                                "",  # 2 - Color of the character
+                                "",  # 2 - Color of the symbol
                                 ""         # 3 - Reset color
                             ],
                 "▓" :
                             [
                                 "Sea",    # 0 - Name
                                 False,  # 1 - If player can pass through
-                                "\u001b[38;5;20m",  # 2 - Color of the character
+                                "\u001b[38;5;20m",  # 2 - Color of the symbol
                                 "\u001b[0m"         # 3 - Reset color
                             ],
                 "~" :
                             [
                                 "River",    # 0 - Name
                                 False,  # 1 - If player can pass through
-                                "\u001b[38;5;117m",  # 2 - Color of the character
+                                "\u001b[38;5;117m",  # 2 - Color of the symbol
                                 "\u001b[0m"         # 3 - Reset color
                             ],
                 "φ" :
                             [
                                 "Mysterious Places",    # 0 - Name
                                 True,  # 1 - If player can pass through
-                                "\u001b[38;5;88m",  # 2 - Color of the character
+                                "\u001b[38;5;88m",  # 2 - Color of the symbol
                                 "\u001b[0m",         # 3 - Reset color
                                 (      # 4 - Position tuple
                                     [27, 42],   # 0 - Position of the first challenge
@@ -180,35 +198,82 @@ map_tiles = {
                             [
                                 "Mysteries Solved",    # 0 - Symbol
                                 True,  # 1 - If player can pass through
-                                "",  # 2 - Color of the character
+                                "",  # 2 - Color of the symbol
                                 "",         # 3 - Reset color
                             ],
                 "¤" :
                             [
                                 "Items stashes",    # 0 - Symbol
                                 True,  # 1 - If player can pass through
-                                "\u001b[38;5;128m",  # 2 - Color of the character
+                                "\u001b[38;5;128m",  # 2 - Color of the symbol
                                 "\u001b[0m",         # 3 - Reset color
+                                # 4 -Item stahes positions
+                                [
+                                    
+                                ],
+                                # 5 - Item drops
+                                [
+
+                                ]
                             ],
                 "∩" :
                             [
                                 "Skull Door",    # 0 - Symbol
                                 True,  # 1 - If player can pass through
-                                "\u001b[38;5;255m",  # 2 - Color of the character
+                                "\u001b[38;5;255m",  # 2 - Color of the symbol
                                 "\u001b[0m",         # 3 - Reset color
                             ],
                 " " :
                             [
-                                "Sand or Dirt",    # 0 - Symbol
+                                "Dirt",    # 0 - Symbol
                                 True,  # 1 - If player can pass through
-                                "",  # 2 - Color of the character
+                                "",  # 2 - Color of the symbol
                                 "",         # 3 - Reset color
+                            ],
+                "░" :
+                            [
+                                "Sand",    # 0 - Symbol
+                                True,  # 1 - If player can pass through
+                                "\u001b[38;5;11m",  # 2 - Color of the symbol
+                                "\u001b[0m",         # 3 - Reset color
                             ],
                 "Ø" :
                             [
                                 "Player",    # 0 - Symbol
                                 True,  # 1 - If player can pass through
-                                "",  # 2 - Color of the character
-                                "",         # 3 - Reset color
+                                "\u001b[38;5;226m",  # 2 - Color of the symbol
+                                "\u001b[0m",         # 3 - Reset color
                             ],
+}
+
+# Menu actions
+menu_data = {
+                "Main Menu" : # Menu Name
+                                [
+                                    "1234"      # Possible inputs
+                                ],
+                "Actions Menu" :
+                                [
+                                    "1234",     # Possible inputs
+                                    "Move",     # First action
+                                    "Open Inventory",   # Second action
+                                    "Sleep",            # Third action
+                                    "Save (Quit Game)"  # Fourth action
+                                ],
+                "Move Menu" :
+                                [
+                                    "1234",
+                                    "Move NORTH",
+                                    "Move WEST",
+                                    "Move EAST",
+                                    "Move SOUTH"
+                                ],
+                "Item Actions" :
+                                [
+                                    "123",
+                                    "Use",
+                                    "Drop",
+                                    "Refill",
+
+                                ]
 }

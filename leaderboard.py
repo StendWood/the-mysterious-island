@@ -15,5 +15,7 @@ def leaderboard():
 
 # Leaderboard Data
 leaderboard_data = [
-                    []
+                    [
+                        
+                    ]
 ]

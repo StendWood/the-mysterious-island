@@ -68,6 +68,9 @@ def death_art():
         Print the death art.
     """
 
+    # Clear the console
+    clear()
+    # Print the death ASCII Art
     print("\u001b[1m               ...")
     print("             ;::::;")
     print("           ;::::; :;")

@@ -1,13 +1,14 @@
 # coding: utf-8
 
 # Imports
+import json
 
 # Extra code
+import os
 import variables
 import toolbox as tb
 import main_menu as mm
 import map_admin as ma
-import os
 from time import sleep
 
 # FUNCTIONS
@@ -43,10 +44,27 @@ def load_game():
 
 # Player chose Save Game in the player actions menu
 def save_game():
-    # Delete the previous files
-    # os.remove("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/map/saved_map.txt")
+    """
+        Clean the save file and save the map and save the data
+    """
+
+    # Delete any save file
+    save_cleaner()
     # Save the map
     ma.save_map()
+    # Save the data
+
+def save_cleaner():
+    """
+        Delete the save file if any exist
+    """
+
+    try:
+        # Delete the previous files if any
+        os.remove("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/map/saved_map.txt")
+    except:
+        # No file to delete
+        pass
 
 # Game Data
 game_data = {
@@ -68,16 +86,56 @@ game_data = {
                                                     False, # 1 - Silver Key
                                                     False  # 2 - Golden Key
                                                 ],
-                                    "item_1" : "",
-                                    "item_2" : "",
-                                    "item_3" : "",
-                                    "item_4" : "",
-                                    "item_5" : "",
-                                    "item_6" : "",
-                                    "item_7" : "",
-                                    "item_8" : "",
-                                    "item_9" : "",
-                                    "item_10" : "",
+                                    "item_0" : 
+                                                {
+                                                    "name" : "Water bottle",
+                                                    "uses" : 5,     # Number of use
+                                                    "use" : ["hydratation", 20],     # What actions the item do on use (+20 hydratation)
+                                                },
+                                    "item_1" : 
+                                                {
+                                                    "name" : "Knife",
+                                                    "uses" : "∞",     # Number of use
+                                                    "use" : ["hydratation", -5],     # What actions the item do on use (-5 hydratation)
+                                                },
+                                    "item_2" : {
+                                                    "name" : "Map",
+                                                    "uses" : "∞"
+                                                },
+                                    "item_3" : {
+                                                    "name" : "Laptop",
+                                                    "uses" : 1,     # Number of use
+                                                    "use" : ["energy", 5],     # What actions the item do on use (+5 energy)
+                                                },
+                                    "item_4" : {
+                                                    "name" : "Solar panel",
+                                                    "uses" : 1,     # Number of use
+                                                    "use" : ["energy", 5],     # What actions the item do on use (+5 energy)
+                                                },
+                                    "item_5" : {
+                                                    "name" : "Avocado",
+                                                    "uses" : 1,     # Number of use
+                                                    "use" : ["satiety", 10],     # What actions the item do on use
+                                                },
+                                    "item_6" : {
+                                                    "name" : None,
+                                                    "uses" : None,     # Number of use
+                                                    "use" : None,     # What actions the item do on use
+                                                },
+                                    "item_7" : {
+                                                    "name" : None,
+                                                    "uses" : None,     # Number of use
+                                                    "use" : None,     # What actions the item do on use
+                                                },
+                                    "item_8" : {
+                                                    "name" : None,
+                                                    "uses" : None,     # Number of use
+                                                    "use" : None,     # What actions the item do on use
+                                                },
+                                    "item_9" : {
+                                                    "name" : None,
+                                                    "uses" : None,     # Number of use
+                                                    "use" : None,     # What actions the item do on use
+                                                },
                                 }
-
 }

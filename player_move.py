@@ -10,6 +10,7 @@ import player_actions as pa
 import toolbox as tb
 import game_data as gdat
 import variables
+import inventory_items as inv
 
 
 # FUNCTIONS
@@ -21,7 +22,7 @@ def player_movement(movement_name):
     
     ma.map_printer()
     # Print the possible actions
-    print(f"\n1 - {variables.menu_data[movement_name][1]}     2- {variables.menu_data[movement_name][2]}      3 - {variables.menu_data[movement_name][3]}       4- {variables.menu_data[movement_name][4]}\n")
+    print(f"\n1 - {ma.menu_data[movement_name][1]}     2- {ma.menu_data[movement_name][2]}      3 - {ma.menu_data[movement_name][3]}       4- {ma.menu_data[movement_name][4]}\n")
     player_choice = mm.menu_choice(movement_name)
     # Move depending on the player choice
     if player_choice == "1":
@@ -75,21 +76,17 @@ def move(player_position, directions):
             # Player can move there
             # Change player position
             gdat.game_data["player"]["position"][0] += 1
-    # Replace the tile where the player go
-    variables.island_map[player_position[0]][player_position[1]] = "Ø"
     # Check if the player is on a tile with an event
     tile_checker()
 
 # Check player movement
 def move_checker(next_pos):
     """
-        Check if the player can move there byt searching in map_tiles data
+        Check if the player can move there by searching in map_tiles data
     """
 
     if ma.map_tiles[next_pos][1] == True:
         # The player can move on the next position
-        # Replace the tile where the player is
-        variables.island_map[gdat.game_data["player"]["position"][0]][gdat.game_data["player"]["position"][1]] = next_pos
         # Increment the movement score
         gdat.game_data["player"]["movements counter"]+=1
         # Energy decay
@@ -114,6 +111,11 @@ def tile_checker():
         # The player position is on a challenge
         tb.clear()
         print("You entered a Challenge")
+    elif gdat.game_data["player"]["position"] in ma.map_tiles["¤"][4]:
+        inv.item_stash()
+    elif gdat.game_data["player"]["position"] in ma.map_tiles["¤"][5]:
+        # Item drops list
+        pass
     else:
         # Clear the console and print the map
         ma.map_printer()

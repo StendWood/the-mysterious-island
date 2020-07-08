@@ -9,6 +9,7 @@ import sys
 import variables
 import game_data as gdat
 import leaderboard as lb
+import map_admin as ma
 
 # FUNCTIONS
 # Show the welcome screen
@@ -56,12 +57,12 @@ def menu_choice(menu_name):
     """
 
     # Valid string
-    valid = variables.menu_data[menu_name][0]
+    valid = ma.menu_data[menu_name][0]
     # Ask player choice
     choice = input("\t\tChoose what you want to do : ")
     while not choice.isdigit() or choice not in valid :
         # Player choice is not a digit or not in valid
-        choice = input(f"\t\tChoose from {variables.menu_data[menu_name][0][0]} - {variables.menu_data[menu_name][0][-1]} : ")
+        choice = input(f"\t\tChoose from {ma.menu_data[menu_name][0][0]} - {ma.menu_data[menu_name][0][-1]} : ")
     return choice
 
 # Call the main menu
