@@ -30,10 +30,10 @@ def ask_player_name():
     # Clear the console
     mm.welcome_screen()
     # Ask the player name
-    gdat.game_data["player"]["name"] = input("What's you name fellow adventurer ? ")
-    while gdat.game_data["player"]["name"] == "":
+    variables.game_data["player"]["name"] = input("What's you name fellow adventurer ? ")
+    while variables.game_data["player"]["name"] == "":
         # If the player name is empty ask again
-        gdat.game_data["player"]["name"] = input("Lost your tongue ? ")
+        variables.game_data["player"]["name"] = input("Lost your tongue ? ")
 
 # Rules and story
 def rules_stories():
@@ -46,7 +46,7 @@ def rules_stories():
     # Print the story
     print("You wake up on a beach, not sure where. The ship is gone but at least you have all your equipments.")
     print("You look inside your backpack and find an old and wet parchment.\n\n")
-    print(f"\tWelcome \u001b[1m\u001b[83m{gdat.game_data['player']['name']}\u001b[0m,\n")    # Bold text \033[1m
+    print(f"\tWelcome \u001b[1m\u001b[83m{variables.game_data['player']['name']}\u001b[0m,\n")    # Bold text \033[1m
     print(f"\tYou lost your way ? Do not worry, what the ocean takes, this island can give.\n")
     print(f"\tYou'll need to find your way to three \033[91mMysterious Places\033[00m.")
     print("\tThree keys you must find and win : ")
@@ -55,7 +55,7 @@ def rules_stories():
     print("\t\t\t\tthe \u001b[38;5;220mGolden Key\u001b[0m\n")  # Gold colored text \u001b[38;5;220m
     print("\tIn your quest do not neglect yourself, you'll need to \u001b[38;5;15mSLEEP\u001b[0m, \u001b[38;5;118mEAT\u001b[0m and \u001b[38;5;75mDRINK\u001b[0m.")
     print("\tOr you'll \u001b[38;5;196mDIE\u001b[0m.")  # Red colored text \u001b[38;5;196m
-    print("\tEvery step will drain your \u001b[38;5;15mENERGY\u001b[0m, \u001b[38;5;118mSATIETY\u001b[0m and \u001b[38;5;75mHYDRATATION\u001b[0m.")
+    print("\tEvery step will drain your \u001b[38;5;11mENERGY\u001b[0m, \u001b[38;5;118mSATIETY\u001b[0m and \u001b[38;5;75mHYDRATATION\u001b[0m.")
     print("\tUse your wits to overcome the challenges ahead.\n")
     print("\tI wish you good luck.\n")
     # Let the player continue

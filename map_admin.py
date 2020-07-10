@@ -68,7 +68,7 @@ def map_printer():
             # Extract the first symbol of the list
             if symbol in map_tiles:
                 # The symbol is a map tile
-                if gdat.game_data["player"]["position"][0] == y and gdat.game_data["player"]["position"][1] == x:
+                if variables.game_data["player"]["position"][0] == y and variables.game_data["player"]["position"][1] == x:
                     # The position to print is equal to the position of the player
                     # Print the player in place of the symbol
                     print(f"{map_tiles['Ø'][2]}{'Ø'}{map_tiles['Ø'][3]}", end = "")
@@ -83,6 +83,15 @@ def map_printer():
                 x+=1
         y+=1
 
+# Inventory Map use
+def inventory_map_printer():
+    for line in variables.island_map:
+        for symbol in line:
+            if symbol == "φ" or symbol == "¤":
+                print(" ", end = "")
+            else:
+                print(symbol, end = "")
+
 # Initialize the counters
 def status_counter_init():
     """
@@ -90,15 +99,15 @@ def status_counter_init():
     """
 
     # Movements counter
-    variables.island_map[25][87] = str(gdat.game_data["player"]["movements counter"])
+    variables.island_map[25][87] = str(variables.game_data["player"]["movements counter"])
     # Actions counter
-    variables.island_map[26][85] = str(gdat.game_data["player"]["actions counter"])
+    variables.island_map[26][85] = str(variables.game_data["player"]["actions counter"])
     # Energy Status
-    variables.island_map[28][84] = str(gdat.game_data["player"]["energy"])
+    variables.island_map[28][84] = str(variables.game_data["player"]["energy"])
     # Hydratation status
-    variables.island_map[29][89] = str(gdat.game_data["player"]["hydratation"])
+    variables.island_map[29][89] = str(variables.game_data["player"]["hydratation"])
     # Satiety status
-    variables.island_map[30][85] = str(gdat.game_data["player"]["satiety"])
+    variables.island_map[30][85] = str(variables.game_data["player"]["satiety"])
 
 # Reset the counters and status after a load
 def status_counter_reset():
@@ -254,7 +263,7 @@ menu_data = {
                                 ],
                 "Actions Menu" :
                                 [
-                                    "1234",     # Possible inputs
+                                    ["1","2","3","4"],     # Possible inputs
                                     "Move",     # First action
                                     "Open Inventory",   # Second action
                                     "Sleep",            # Third action
@@ -262,7 +271,7 @@ menu_data = {
                                 ],
                 "Move Menu" :
                                 [
-                                    "1234",
+                                    ["1","2","3","4"],
                                     "Move NORTH",
                                     "Move WEST",
                                     "Move EAST",
@@ -270,10 +279,10 @@ menu_data = {
                                 ],
                 "Item Actions" :
                                 [
-                                    "123",
+                                    ["1","2","3"],
                                     "Use",
                                     "Drop",
                                     "Refill",
-
+                                    "Take",
                                 ]
 }

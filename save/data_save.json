@@ -1,0 +1,91 @@
+{
+    "player": {
+        "name": "",
+        "position": [
+            14,
+            58
+        ],
+        "energy": 64,
+        "hydratation": 76,
+        "satiety": 91,
+        "movements counter": 12,
+        "actions counter": 0
+    },
+    "inventory": {
+        "keychain": [
+            false,
+            false,
+            false
+        ],
+        "item_0": {
+            "name": "Water bottle",
+            "uses": 5,
+            "use": [
+                "hydratation",
+                20
+            ]
+        },
+        "item_1": {
+            "name": "Knife",
+            "uses": "\u221e",
+            "use": [
+                "hydratation",
+                -5
+            ]
+        },
+        "item_2": {
+            "name": "Map",
+            "uses": "\u221e"
+        },
+        "item_3": {
+            "name": "Laptop",
+            "uses": 1,
+            "use": [
+                "energy",
+                5
+            ]
+        },
+        "item_4": {
+            "name": "Solar panel",
+            "uses": 1,
+            "use": [
+                "energy",
+                5
+            ]
+        },
+        "item_5": {
+            "name": null,
+            "uses": null,
+            "use": null
+        },
+        "item_6": {
+            "name": "Banana",
+            "uses": 1,
+            "use": [
+                "satiety",
+                5
+            ]
+        },
+        "item_7": {
+            "name": null,
+            "uses": null,
+            "use": null
+        },
+        "item_8": {
+            "name": null,
+            "uses": null,
+            "use": null
+        },
+        "item_9": {
+            "name": null,
+            "uses": null,
+            "use": null
+        }
+    },
+    "Item stash": [
+        0
+    ],
+    "Item drop": [
+        0
+    ]
+}

@@ -3,7 +3,6 @@
 # Imports
 
 # Extra code
-import variables
 import main_menu as mm
 import map_admin as ma
 import player_actions as pa

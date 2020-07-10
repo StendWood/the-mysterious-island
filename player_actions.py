@@ -2,6 +2,7 @@
 
 # Imports
 import sys
+import time
 
 # Extra code
 import main_menu as mm
@@ -60,16 +61,18 @@ def player_sleep():
     while not sleep_time.isdigit():
         sleep_time = input("\n\t\tHow many hours do you want to sleep ? (Choose a number) ")
     # Increment the actions score
-    gdat.game_data["player"]["actions counter"]+=1
+    variables.game_data["player"]["actions counter"]+=1
     # Energy regeneration
-    gdat.game_data["player"]["energy"] += (6 * int(sleep_time))
-    if gdat.game_data["player"]["energy"] > 100:
+    variables.game_data["player"]["energy"] += (6 * int(sleep_time))
+    if variables.game_data["player"]["energy"] > 100:
         # If energy over 100 set it back to 100
-        gdat.game_data["player"]["energy"] = 100
+        variables.game_data["player"]["energy"] = 100
     # Hydratation decay
-    gdat.game_data["player"]["hydratation"] -= (2 * int(sleep_time))
+    variables.game_data["player"]["hydratation"] -= (2 * int(sleep_time))
     # Satiety decay
-    gdat.game_data["player"]["satiety"] -= (1 * int(sleep_time))
+    variables.game_data["player"]["satiety"] -= (1 * int(sleep_time))
+    # Wait for X hours
+    time.sleep((int(sleep_time)))
     # Check if player is alive
     check_vitals()
 
@@ -79,7 +82,7 @@ def check_vitals():
         Check the player status, if any is < 0 the game stops and the player lose.
     """
 
-    if gdat.game_data["player"]["energy"] <= 0:
+    if variables.game_data["player"]["energy"] <= 0:
         # Print the death art
         tb.death_art()
         # Energy reached 0
@@ -88,7 +91,7 @@ def check_vitals():
         pass
         # Exit the programm
         sys.exit()
-    elif gdat.game_data["player"]["hydratation"] <= 0:
+    elif variables.game_data["player"]["hydratation"] <= 0:
         # Print the death art
         tb.death_art()
         # Hydratation reached 0
@@ -97,7 +100,7 @@ def check_vitals():
         pass
         # Exit the programm
         sys.exit()
-    elif gdat.game_data["player"]["satiety"] <= 0:
+    elif variables.game_data["player"]["satiety"] <= 0:
         # Print the death art
         tb.death_art()
         # Satiety reached 0
