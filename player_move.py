@@ -117,8 +117,18 @@ def tile_checker():
     # Check for the mysterious places tiles
     if variables.game_data["player"]["position"] in ma.map_tiles["φ"][4]:
         # The player position is on a challenge
-        tb.clear()
-        print("You entered a Challenge")
+        if variables.game_data["player"]["position"] == ma.map_tiles["φ"][4][0]:
+            # Launch the first challenge
+            tb.clear()
+            print("You entered the first Challenge")
+        if variables.game_data["player"]["position"] == ma.map_tiles["φ"][4][1]:
+            # Launch the second challenge
+            tb.clear()
+            print("You entered the second Challenge")
+        if variables.game_data["player"]["position"] == ma.map_tiles["φ"][4][2]:
+            # Launch the third challenge
+            tb.clear()
+            print("You entered the third Challenge")
     else:
         # The player is on an item stash
         for key in variables.game_data["Item stash"]:

@@ -107,12 +107,4 @@ game_data = {
                                                             "items" : [],
                                                         },
                                 },
-                "Item drop" : 
-                                {
-                                    "drop_1" : 
-                                                        {
-                                                            "position" : [0,0],
-                                                            "items" : [],
-                                                        },
-                                }
 }

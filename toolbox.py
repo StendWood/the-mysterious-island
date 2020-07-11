@@ -72,8 +72,8 @@ def death_art():
     clear()
     # Print the death ASCII Art
     print("\u001b[1m               ...")
-    print("             ;::::;")
-    print("           ;::::; :;")
+    print("             ;::::;              GAME")
+    print("           ;::::; :;                OVER")
     print("         ;:::::'   :;")
     print("        ;:::::;     ;.")
     print("       ,:::::'       ;           OOO\\")

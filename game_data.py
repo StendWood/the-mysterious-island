@@ -31,7 +31,7 @@ def new_game():
 # Player chose Load Game in the main menu
 def load_game():
     # Check if the save file exist at that location
-    if os.path.isfile("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/map/saved_map.txt") and os.path.isfile("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/data_save.json"):
+    if os.path.isfile("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/maps/saved_map.txt") and os.path.isfile("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/data_save.json"):
         # Save file exist
         # Load saved map
         ma.saved_map()
@@ -68,7 +68,7 @@ def save_cleaner():
 
     try:
         # Delete the previous files if any
-        os.remove("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/map/saved_map.txt")
+        os.remove("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/maps/saved_map.txt")
         os.remove("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/data_save.json")
     except:
         # No file to delete

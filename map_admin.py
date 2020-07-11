@@ -17,7 +17,7 @@ def new_map():
     """
 
     # Open the map file
-    with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/map/base_map.txt", "r", encoding="utf-8") as map:
+    with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/maps/base_map.txt", "r", encoding="utf-8") as map:
         # Put everyline in a list and remove the \n at the end
         temp_map = [line for line in map]
 
@@ -38,7 +38,7 @@ def saved_map():
     """
 
     # Open the map files
-    with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/map/saved_map.txt", "r", encoding="utf-8") as map:
+    with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/maps/saved_map.txt", "r", encoding="utf-8") as map:
         # Put everyline in a list and remove the \n at the end
         temp_map = [line for line in map]
 
@@ -142,7 +142,7 @@ def save_map():
     # Reset the counters and status before saving the map
     status_counter_reset()
     # Modify the save file
-    with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/map/saved_map.txt", "w+", encoding="utf-8") as map:
+    with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/maps/saved_map.txt", "w+", encoding="utf-8") as map:
         for line in variables.island_map:
             line = "".join(line)
             map.writelines(line)

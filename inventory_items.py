@@ -110,6 +110,7 @@ def inventory_choices():
     elif choice == "3":
         # Refill the item if it can be refilled
         refill_item(item_name)
+    inventory_choices()
     # Player choice is not a digit or not in valid
     print(f"\t\tChoose from the item list or choose Q to go back to the map")
     sleep(2)
@@ -163,10 +164,7 @@ def use_item(item_name, item_number):
             inv_show()
             # Show the use message
             print(items_data[item_name]["message"])
-    # Wait 2 seconds then refresh the screen
     sleep(3)
-    # Show the inventory choice again
-    inventory_choices()
 
 
 # Delete the depleted items
@@ -193,18 +191,27 @@ def take_item(item_name):
         Let the player take the item.
     """
 
-    pass
+    # Search for an empty slot
+    for key in variables.game_data["inventory"]:
+        if "item" in key:
+            if variables.game_data["inventory"][key]["name"] == None:
+                variables.game_data["inventory"][key]["name"] = item_name
+                variables.game_data["inventory"][key]["uses"] = items_data[item_name]["uses"]
+                variables.game_data["inventory"][key]["use"] = items_data[item_name]["use"]
+                print(f"{item_name} added to your inventory")
+                sleep(2)
+                break
 
 
 # Refill an item
 def refill_item(item_name):
     """
-        Refill the water bottle and set it's use back to 5
+        Refill the water bottle and set it's number of uses back to 5
     """
 
     if item_name != "Water bottle":
         # Item is not the water bottle
-        print(f"\u001b[38;5;196mDespite your best effort you failed to fill that {item_name} with water...\u001b[38;5;0m")
+        print(f"\u001b[38;5;196mDespite your best effort you failed to fill that {item_name} with water...\u001b[0m")
     else:
         # Item is the water bottle
         # Check if any tile around the player is the river
@@ -227,7 +234,7 @@ def refill_item(item_name):
             # No river found
             # Print error message
             print(items_data["Water bottle"]["refill error"])
-
+    sleep(3)
 
 
 # Drop an item
@@ -241,13 +248,14 @@ def drop_item(item_name, player_choice):
         inv_show()
         # If the item actions drop is False
         print("\t\t\t\u001b[38;5;196mYou can't drop that !\u001b[0m")
-        sleep(2)
     else:
         # The item is dropable, drop it
-        pass
+        variables.game_data["inventory"][player_choice]["name"] = None
+        variables.game_data["inventory"][player_choice]["uses"] = None
+        variables.game_data["inventory"][player_choice]["use"] = None
         # Show the drop message
-    # Ask for antoher choice
-    inventory_choices()
+        print(f"You dropped the {item_name} but a monkey stole it !")
+    sleep(3)
 
 
 # Generate the random items stashes
@@ -262,8 +270,8 @@ def random_stashes():
     for i in range(5):
         # Change the position from every stash
         variables.game_data["Item stash"][f"item_stash_{i+1}"]["position"] = pos[i]
-        # Add the item to the stash
-        variables.game_data["Item stash"][f"item_stash_{i+1}"]["items"] = random.choice(random_item_name)
+        # Add the item to the stash using a random with weights
+        variables.game_data["Item stash"][f"item_stash_{i+1}"]["items"] = random.choices(random_item_name, weights=(30,30,5,5,25,5))
         # Change the map tile
         variables.island_map[variables.game_data["Item stash"][f"item_stash_{i+1}"]["position"][0]][variables.game_data["Item stash"][f"item_stash_{i+1}"]["position"][1]] = "¤"
 
