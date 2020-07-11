@@ -25,8 +25,11 @@ def new_map():
         # Recreate a list
             x = [char for char in line]
             variables.island_map.append(x)
+
     # Initialize the counters and status
     status_counter_init()
+    # Populate the items stashes
+    inv.random_stashes()
 
 # Load the saved map when the player load a game
 def saved_map():
@@ -52,7 +55,7 @@ def map_printer():
     """
         Clear the console and print the map (apply color)
     """
-
+    
     # Console clear
     tb.clear()
     # Status and counter refresh

@@ -48,6 +48,7 @@ def player_actions(action_name):
         # Exit the programm
         sys.exit()
 
+
 # Sleep
 def player_sleep():
     """
@@ -72,9 +73,10 @@ def player_sleep():
     # Satiety decay
     variables.game_data["player"]["satiety"] -= (1 * int(sleep_time))
     # Wait for X hours
-    time.sleep((int(sleep_time)))
+    time.sleep(3)
     # Check if player is alive
     check_vitals()
+
 
 # Check if any vitals is at 0
 def check_vitals():

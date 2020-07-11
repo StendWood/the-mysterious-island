@@ -12,7 +12,6 @@ import game_data as gdat
 import variables
 import inventory_items as inv
 
-
 # FUNCTIONS
 # Let the player chose where he wants to move
 def player_movement(movement_name):
@@ -39,6 +38,7 @@ def player_movement(movement_name):
     else:
         # Move south
         move(variables.game_data["player"]["position"], player_choice)
+
 
 # Let the player move North
 def move(player_position, directions):
@@ -85,6 +85,7 @@ def move(player_position, directions):
     # Check if the player is on a tile with an event
     tile_checker()
 
+
 # Check player movement
 def move_checker(next_pos):
     """
@@ -106,6 +107,7 @@ def move_checker(next_pos):
         # Validate the move
         return True
 
+
 # Check where the player stands
 def tile_checker():
     """
@@ -117,11 +119,18 @@ def tile_checker():
         # The player position is on a challenge
         tb.clear()
         print("You entered a Challenge")
-    elif variables.game_data["player"]["position"] in ma.map_tiles["¤"][4]:
-        pass
-    elif variables.game_data["player"]["position"] in ma.map_tiles["¤"][5]:
-        # Item drops list
-        pass
     else:
+        # The player is on an item stash
+        for key in variables.game_data["Item stash"]:
+            # Check the first key layer
+            for key_2 in variables.game_data["Item stash"][key]:
+                # Iterate second key layer
+                if variables.game_data["Item stash"][key][key_2] == variables.game_data["player"]["position"]:
+                    # Extract the item name if the position is the one
+                    item_name = variables.game_data["Item stash"][key]["items"]
+                    # Clear console
+                    tb.clear()
+                    # # Print the stash with the item right item name
+                    inv.show_stash(key, key_2, item_name)
         # Let the player choose again
         pa.player_actions("Actions Menu")

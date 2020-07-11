@@ -11,7 +11,6 @@ import toolbox as tb
 import main_menu as mm
 import map_admin as ma
 
-
 # FUNCTIONS
 # Player chose New Game in the main menu
 def new_game():
@@ -28,10 +27,11 @@ def new_game():
     # Load the base_map.txt
     ma.new_map()
 
+
 # Player chose Load Game in the main menu
 def load_game():
     # Check if the save file exist at that location
-    if os.path.isfile("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/map/saved_map.txt"):
+    if os.path.isfile("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/map/saved_map.txt") and os.path.isfile("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/data_save.json"):
         # Save file exist
         # Load saved map
         ma.saved_map()
@@ -44,6 +44,7 @@ def load_game():
         sleep(3)
         # Return to the menu
         mm.main_menu()
+
 
 # Player chose Save Game in the player actions menu
 def save_game():
@@ -58,6 +59,7 @@ def save_game():
     # Save the data
     save_data()
 
+
 # Remove any save files
 def save_cleaner():
     """
@@ -67,23 +69,26 @@ def save_cleaner():
     try:
         # Delete the previous files if any
         os.remove("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/map/saved_map.txt")
+        os.remove("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/data_save.json")
     except:
         # No file to delete
         pass
 
+
 # Save the data
 def save_data():
     """
-        Save the game_data into JSON
+        Save the game_data DICT into JSON save file.
     """
 
     with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/data_save.json", "w") as save_file:
         save_file.write(json.dumps(variables.game_data, indent= 4))
 
+
 # Load the data
 def load_data():
     """
-        Load the game_data into JSON
+        Load the game data DICT from the JSON save file to the game_data variable.
     """
 
     with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/data_save.json", "r") as load_file:

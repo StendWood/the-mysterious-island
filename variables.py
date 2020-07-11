@@ -54,9 +54,9 @@ game_data = {
                                                     "use" : ["energy", 5],     # What actions the item do on use (+5 energy)
                                                 },
                                     "item_5" : {
-                                                    "name" : "Avocado",
-                                                    "uses" : 1,     # Number of use
-                                                    "use" : ["satiety", 10],     # What actions the item do on use
+                                                    "name" : None,
+                                                    "uses" : None,     # Number of use
+                                                    "use" : None,     # What actions the item do on use
                                                 },
                                     "item_6" : {
                                                     "name" : "Banana",
@@ -69,9 +69,9 @@ game_data = {
                                                     "use" : None,     # What actions the item do on use
                                                 },
                                     "item_8" : {
-                                                    "name" : None,
-                                                    "uses" : None,     # Number of use
-                                                    "use" : None,     # What actions the item do on use
+                                                    "name" : "Banana",
+                                                    "uses" : 2,     # Number of use
+                                                    "use" : ["satiety", 5],     # What actions the item do on use
                                                 },
                                     "item_9" : {
                                                     "name" : None,
@@ -79,10 +79,40 @@ game_data = {
                                                     "use" : None,     # What actions the item do on use
                                                 },
                                 },
-                "Item stash" : [
-                                    0
-                                ],
-                "Item drop" : [
-                                    0
-                ]
+                "Item stash" : 
+                                {   
+                                    "item_stash_1" : 
+                                                        {
+                                                            "position" : [],
+                                                            "items" : [],
+                                                        },
+                                    "item_stash_2" : 
+                                                        {
+                                                            "position" : [],
+                                                            "items" : [],
+                                                        },
+                                    "item_stash_3" : 
+                                                        {
+                                                            "position" : [],
+                                                            "items" : [],
+                                                        },
+                                    "item_stash_4" : 
+                                                        {
+                                                            "position" : [],
+                                                            "items" : [],
+                                                        },
+                                    "item_stash_5" : 
+                                                        {
+                                                            "position" : [],
+                                                            "items" : [],
+                                                        },
+                                },
+                "Item drop" : 
+                                {
+                                    "drop_1" : 
+                                                        {
+                                                            "position" : [0,0],
+                                                            "items" : [],
+                                                        },
+                                }
 }

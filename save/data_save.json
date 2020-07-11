@@ -1,15 +1,15 @@
 {
     "player": {
-        "name": "",
+        "name": "1",
         "position": [
-            14,
-            58
+            15,
+            36
         ],
-        "energy": 64,
-        "hydratation": 76,
-        "satiety": 91,
-        "movements counter": 12,
-        "actions counter": 0
+        "energy": 1,
+        "hydratation": 42,
+        "satiety": 34,
+        "movements counter": 37,
+        "actions counter": 4
     },
     "inventory": {
         "keychain": [
@@ -19,7 +19,7 @@
         ],
         "item_0": {
             "name": "Water bottle",
-            "uses": 5,
+            "uses": 4,
             "use": [
                 "hydratation",
                 20
@@ -60,7 +60,7 @@
         },
         "item_6": {
             "name": "Banana",
-            "uses": 1,
+            "uses": 2,
             "use": [
                 "satiety",
                 5
@@ -82,10 +82,50 @@
             "use": null
         }
     },
-    "Item stash": [
-        0
-    ],
-    "Item drop": [
-        0
-    ]
+    "Item stash": {
+        "item_stash_1": {
+            "position": [
+                16,
+                51
+            ],
+            "items": "Empty Coco"
+        },
+        "item_stash_2": {
+            "position": [
+                6,
+                4
+            ],
+            "items": "Banana"
+        },
+        "item_stash_3": {
+            "position": [
+                14,
+                24
+            ],
+            "items": "Empty Coco"
+        },
+        "item_stash_4": {
+            "position": [
+                10,
+                38
+            ],
+            "items": "Empty Coco"
+        },
+        "item_stash_5": {
+            "position": [
+                25,
+                59
+            ],
+            "items": "Avocado"
+        }
+    },
+    "Item drop": {
+        "drop_1": {
+            "position": [
+                0,
+                0
+            ],
+            "items": []
+        }
+    }
 }

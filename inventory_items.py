@@ -40,19 +40,21 @@ def inv_show():
     print()
     # Clean the ivnentory from depleted items
     inventory_cleaner()
-    # Counter to keep track of how many items are in the inventory
-    item_number = 0
+    item_uses = "▌"
     for key in variables.game_data["inventory"]:
         # Get the first key
         if "item" in key:
             if variables.game_data["inventory"][key]["name"] != None:
                 # Name is not None
-                print(f"{item_number} - {variables.game_data['inventory'][key]['name']} {variables.game_data['inventory'][key]['uses']}")
-                item_number+=1
+                if variables.game_data['inventory'][key]['uses'] == "∞":
+                    print(f"{key[-1]} - {variables.game_data['inventory'][key]['name']} {variables.game_data['inventory'][key]['uses']}")
+                else:
+                    print(f"{key[-1]} - {variables.game_data['inventory'][key]['name']} {item_uses*int(variables.game_data['inventory'][key]['uses'])}")
+                # item_number+=1
     # Quit the inventory and return to the map
     print("Q - Return to map")
     print()
-    return item_number
+    # return item_number
 
 
 # Inventory item choices
@@ -64,32 +66,38 @@ def inventory_choices():
     # # Clean the ivnentory from depleted items
     inventory_cleaner()
     # Print the inventory and show save how many items are in the bag
-    items = inv_show()
-    # Create the valid input from the number of items in the inventory
-    valid = [str(num) for num in range(items)]
-    valid.append("Q")
+    inv_show()
     # Ask for the player choice
     choice = input("\t\tChoose what you want to do : ").upper()
-    while choice not in valid :
-        # Player choice is not a digit or not in valid
-        choice = input(f"\t\tChoose from 0 - {items-1} or Q : ").upper()
     # Choice is a digit and in valid
     if choice.capitalize() == "Q":
         # Choice is Q, return to map
         ma.map_printer()
         # Ask what the player wants to do
         pa.player_actions("Actions Menu")
-    # Refresh the screen
-    inv_show()
-    # Print the item chosed by the player
-    print(f"\t\tYou chose the {variables.game_data['inventory'][f'item_{choice}']['name']}")
-    # Save the item name
-    item_name = f"{variables.game_data['inventory'][f'item_{choice}']['name']}"
-    # Save the item number
-    item_number = f"item_{choice}"
-    # Ask what he wants to do with that item
-    print(f"\n1 - {ma.menu_data['Item Actions'][1]}     2- {ma.menu_data['Item Actions'][2]}      3 - {ma.menu_data['Item Actions'][3]}\n")
-    choice = mm.menu_choice("Item Actions")
+    try:
+        if variables.game_data['inventory'][f'item_{choice}']['name'] == None:
+            # Player choice is not a digit or not in valid
+            print(f"\t\tChoose from the item list or choose Q to go back to the map.")
+            sleep(2)
+            inventory_choices()
+        else:
+            # Refresh the screen
+            inv_show()
+            # Print the item chosed by the player
+            print(f"\t\tYou chose the {variables.game_data['inventory'][f'item_{choice}']['name']}")
+            # Save the item name
+            item_name = f"{variables.game_data['inventory'][f'item_{choice}']['name']}"
+            # Save the item number
+            item_number = f"item_{choice}"
+            # Ask what he wants to do with that item
+            print(f"\n1 - {ma.menu_data['Item Actions'][1]}     2- {ma.menu_data['Item Actions'][2]}      3 - {ma.menu_data['Item Actions'][3]}\n")
+            choice = mm.menu_choice("Item Actions")
+    except KeyError:
+        print(f"\t\tChoose from the item list or choose Q to go back to the map.")
+        sleep(2)
+        inventory_choices()
+    
     # Refresh the screen
     inv_show()
     # The player choose
@@ -99,9 +107,14 @@ def inventory_choices():
     elif choice == "2":
         # Drop the selected item if it can be dropped
         drop_item(item_name, item_number)
-    elif use_item == "3":
+    elif choice == "3":
         # Refill the item if it can be refilled
-        pass
+        refill_item(item_name)
+    # Player choice is not a digit or not in valid
+    print(f"\t\tChoose from the item list or choose Q to go back to the map")
+    sleep(2)
+    inventory_choices()
+
 
 # Use an item
 def use_item(item_name, item_number):
@@ -116,7 +129,7 @@ def use_item(item_name, item_number):
         # Add 1 action to the counter
         variables.game_data["player"]["actions counter"]+=1
         # Wait for 7 seconds
-        sleep(7)
+        sleep(5)
     # Check if the item is usable
     elif not items_data[item_name]["actions"]["use"]:
         # If the item actions use is False
@@ -150,10 +163,11 @@ def use_item(item_name, item_number):
             inv_show()
             # Show the use message
             print(items_data[item_name]["message"])
-    # Wait 3 seconds then refresh the screen
+    # Wait 2 seconds then refresh the screen
     sleep(3)
     # Show the inventory choice again
     inventory_choices()
+
 
 # Delete the depleted items
 def inventory_cleaner():
@@ -162,7 +176,7 @@ def inventory_cleaner():
     """
 
     # List of item to protect from deletion if depleted
-    item_protected = ["item_0", "item_3", "item_4"]
+    item_protected = ["item_0", "item_3", "ite"]
     for key in variables.game_data["inventory"]:
         # Get the first key
         if "item" in key and key not in item_protected:
@@ -172,6 +186,7 @@ def inventory_cleaner():
                 variables.game_data["inventory"][key]["uses"] = None
                 variables.game_data["inventory"][key]["use"] = None
 
+
 # take an item
 def take_item(item_name):
     """
@@ -180,6 +195,7 @@ def take_item(item_name):
 
     pass
 
+
 # Refill an item
 def refill_item(item_name):
     """
@@ -187,7 +203,32 @@ def refill_item(item_name):
     """
 
     if item_name != "Water bottle":
-        print(f"Despite your best effort you can't refill that {item_name}...")
+        # Item is not the water bottle
+        print(f"\u001b[38;5;196mDespite your best effort you failed to fill that {item_name} with water...\u001b[38;5;0m")
+    else:
+        # Item is the water bottle
+        # Check if any tile around the player is the river
+        tiles_check = []
+        tiles_check.append(variables.island_map[variables.game_data["player"]["position"][0]-1][variables.game_data["player"]["position"][1]])
+        tiles_check.append(variables.island_map[variables.game_data["player"]["position"][0]][variables.game_data["player"]["position"][1]-1])
+        tiles_check.append(variables.island_map[variables.game_data["player"]["position"][0]][variables.game_data["player"]["position"][1]+1])
+        tiles_check.append(variables.island_map[variables.game_data["player"]["position"][0]+1][variables.game_data["player"]["position"][1]])
+        tiles_check.append(variables.island_map[variables.game_data["player"]["position"][0]-1][variables.game_data["player"]["position"][1]-1])
+        tiles_check.append(variables.island_map[variables.game_data["player"]["position"][0]+1][variables.game_data["player"]["position"][1]+1])
+        tiles_check.append(variables.island_map[variables.game_data["player"]["position"][0]+1][variables.game_data["player"]["position"][1]-1])
+        tiles_check.append(variables.island_map[variables.game_data["player"]["position"][0]+1][variables.game_data["player"]["position"][1]+1])
+        if "~" in tiles_check:
+            # A river is found around the player
+            # Set the number of uses back to 5
+            variables.game_data["inventory"]["item_0"]["uses"] = 5
+            # Print success message
+            print(items_data["Water bottle"]["refill message"])
+        else:
+            # No river found
+            # Print error message
+            print(items_data["Water bottle"]["refill error"])
+
+
 
 # Drop an item
 def drop_item(item_name, player_choice):
@@ -200,12 +241,67 @@ def drop_item(item_name, player_choice):
         inv_show()
         # If the item actions drop is False
         print("\t\t\t\u001b[38;5;196mYou can't drop that !\u001b[0m")
-        sleep(3)
+        sleep(2)
     else:
-        # If item is dropable drop it and show it on the map
+        # The item is dropable, drop it
         pass
         # Show the drop message
+    # Ask for antoher choice
     inventory_choices()
+
+
+# Generate the random items stashes
+def random_stashes():
+    """
+        Generate and populate the item stashes on the map
+    """
+
+    # Choose 5 position at random in the possible positions
+    pos = random.sample(items_stashes_position, k=5)
+    # Add the position and item in the stash
+    for i in range(5):
+        # Change the position from every stash
+        variables.game_data["Item stash"][f"item_stash_{i+1}"]["position"] = pos[i]
+        # Add the item to the stash
+        variables.game_data["Item stash"][f"item_stash_{i+1}"]["items"] = random.choice(random_item_name)
+        # Change the map tile
+        variables.island_map[variables.game_data["Item stash"][f"item_stash_{i+1}"]["position"][0]][variables.game_data["Item stash"][f"item_stash_{i+1}"]["position"][1]] = "¤"
+
+
+def show_stash(key, key_2, item_name):
+    """
+        Show the stash by extracting the position (key, key_2) of an item stash and the name of the item that populates it (item_name)
+    """
+
+    print(" __________")
+    print("/\\_________\\")
+    print("| /         /")
+    print("`...........")
+    print("|\\         \\")
+    print(f"| |---------|           1 - {item_name}")
+    print("\\ |         |           Q - Quit")
+    print(" \\|_________|")
+
+    choice = input("\t\tChoose what you want to do : ").upper()
+    while choice not in "1Q" :
+        # Player choice is not a digit or not in valid
+        choice = input(f"\t\tChoose from 1 or Q : ").upper()
+    if choice == "1":
+        # Player chosed to take the item
+        # Empty the stash
+        variables.game_data["Item stash"][key]["position"] = []
+        variables.game_data["Item stash"][key]["items"] = []
+        # Reset symbol position
+        variables.island_map[variables.game_data["player"]["position"][0]][variables.game_data["player"]["position"][1]] = " "
+        # Take the item
+        take_item(item_name)
+        # Return the player to the map
+        ma.map_printer()
+        pa.player_actions("Actions Menu")
+    elif choice == "Q":
+        # Return the player to the map
+        ma.map_printer()
+        pa.player_actions("Actions Menu")
 
 
 # VARIABLES
@@ -221,7 +317,9 @@ items_data = {
                                                     "refill"    : True,     # Can the item refill
                                                 },
                                     "message" : "\u001b[38;5;45mYou take a sip and feel refreshed ! (+20 Hydratation)\u001b[0m", # What is shown when you use the item
-                                    "error message" : "\u001b[38;5;196mYour bottle is empty\u001b[38;5;0m" # What is shown when you can't use the item
+                                    "error message" : "\u001b[38;5;196mYour bottle is empty\u001b[38;5;0m", # What is shown when you can't use the item
+                                    "refill message" : "\u001b[38;5;45mYour bottle is now back to full with fresh and clean water !\u001b[0m",
+                                    "refill error" : "\u001b[38;5;196mYou can't find any water around you !\u001b[0m",
                                 },
                 "Knife" :
                                 {
@@ -274,8 +372,8 @@ items_data = {
                                                     "refill"    : False,    # Can the item refill
                                                 },
                                     "uses" : 1,     # Number of use
-                                    "use" : ["satiety", 10],     # What actions the item do on use (+10 satiety)
-                                    "message" : "\u001b[38;5;118mThat Avocado was tasty ! (+10 Satiety).\u001b[0m" # What is shown when you use the item
+                                    "use" : ["satiety", 20],     # What actions the item do on use (+20 satiety)
+                                    "message" : "\u001b[38;5;118mThat Avocado was tasty ! (+20 Satiety).\u001b[0m" # What is shown when you use the item
                                 },
                 "Passed Avocado" :
                                 {
@@ -297,9 +395,9 @@ items_data = {
                                                     "drop"      : True,    # Can the item be dropped
                                                     "refill"    : False,    # Can the item refill
                                                 },
-                                    "uses" : 2,     # Number of use
-                                    "use" : ["satiety", 5],     # What actions the item do on use (+5 satiety)
-                                    "message" : "\u001b[38;5;118mThat Banana was so sweet ! (+5 Satiety).\u001b[0m" # What is shown when you use the item
+                                    "uses" : 1,     # Number of use
+                                    "use" : ["satiety", 10],     # What actions the item do on use (+10 satiety)
+                                    "message" : "\u001b[38;5;118mThat Banana was so sweet ! (+10 Satiety).\u001b[0m" # What is shown when you use the item
                                 },
                 "Rotten Banana" :
                                 {
@@ -349,7 +447,7 @@ random_item_name = [
                     "Empty Coco"
 ]
 
-# Possible positions fo the random stashes
+# Possible positions for the random stashes
 items_stashes_position = [
-                            [25,59],
+                            [25,59], [16,51], [16,4], [28,7], [6,4], [6,24], [2,38], [14,24], [27,28], [13,62], [10,38]
 ]
