@@ -19,23 +19,38 @@ def inv_show():
         Simply show the inventory and ask what the player wants to do
     """
 
+    # Key checker
+    bronze_key = "\u001b[38;5;196mX\u001b[0m"
+    silver_key = "\u001b[38;5;196mX\u001b[0m"
+    golden_key = "\u001b[38;5;196mX\u001b[0m"
+
+    if variables.game_data['inventory']['keychain'][0]:
+        # The player has the bronze key
+        bronze_key = "\u001b[38;5;118m√\u001b[0m"
+    if variables.game_data['inventory']['keychain'][1]:
+        # The player has the silver key
+        silver_key = "\u001b[38;5;118m√\u001b[0m"
+    if variables.game_data['inventory']['keychain'][2]:
+        # The player has the golden key
+        golden_key = "\u001b[38;5;118m√\u001b[0m"
+    
     tb.clear()
     # ASCII Art
-    print("     _....._")
-    print("    ';-.--';'")
-    print("      }===={       _.---.._")
-    print("    .'      '.    ';-..--';")
-    print("   /::        \\    `}===={")
+    print("\u001b[38;5;255m     _....._")
+    print(f"     ';-.--';'                                  \u001b[38;5;136mBronze Key\u001b[0m : {bronze_key}")
+    print(f"\u001b[38;5;255m      )====(       _.---.._                     \u001b[38;5;252mSilver Key\u001b[0m : {silver_key}")
+    print(f"\u001b[38;5;255m    .'      '.    ';-..--';                     \u001b[38;5;220mGolden Key\u001b[0m : {golden_key}")
+    print("\u001b[38;5;255m   /::        \\    `)====(")
     print("  |::          :   /      '.")
     print("  \\::.        _.---_        \\")
     print("   '::_     _`---..-';       |")
-    print("       `````  }====={        /")
-    print(f"            .'       '.   _.'                   Movements :     {variables.game_data['player']['movements counter']}")
-    print(f"           /::         \\ `                      Actions :       {variables.game_data['player']['actions counter']}")
-    print("          |::           |")
-    print(f"          \\::.          /                       Energy :        {variables.game_data['player']['energy']}")
-    print(f"           '::_      _.'                        Hydratation :   {variables.game_data['player']['hydratation']}")
-    print(f"               ``````                           Satiety :       {variables.game_data['player']['satiety']}")
+    print("       `````  )=====(        /")
+    print(f"            .'       '.   _.'                   \u001b[0mMovements :     {variables.game_data['player']['movements counter']}")
+    print(f"\u001b[38;5;255m           /::         \\ `                      \u001b[0mActions :       {variables.game_data['player']['actions counter']}")
+    print("\u001b[38;5;255m          |::           |")
+    print(f"\u001b[38;5;255m          \\::.          /                       \u001b[38;5;11mEnergy\u001b[0m :        {variables.game_data['player']['energy']}")
+    print(f"\u001b[38;5;255m           '::_      _.'                        \u001b[38;5;75mHydratation\u001b[0m :   {variables.game_data['player']['hydratation']}")
+    print(f"\u001b[38;5;255m               ``````                           \u001b[38;5;118mSatiety\u001b[0m :       {variables.game_data['player']['satiety']}")
     # Print the inventory page
     print()
     # Clean the ivnentory from depleted items
@@ -155,9 +170,18 @@ def use_item(item_name, item_number):
             variables.game_data["player"]["actions counter"]+=1
             # Use the item, aplly the effect : + or - X to player status
             variables.game_data["player"][variables.game_data["inventory"][item_number]["use"][0]] += variables.game_data["inventory"][item_number]["use"][1]
-            if variables.game_data["player"][variables.game_data["inventory"][item_number]["use"][0]] > 100:
-                # The stats is above 100, set it back to 100
-                variables.game_data["player"][variables.game_data["inventory"][item_number]["use"][0]] = 100
+            if variables.game_data["player"]["energy"] > variables.game_data["player"]["max energy"]:
+                # Max energy is above max
+                # Change is to tthe maximum value
+                variables.game_data["player"]["energy"] = variables.game_data["player"]["max energy"]
+            elif variables.game_data["player"]["satiety"] > variables.game_data["player"]["max satiety"]:
+                # Max satiety is above max
+                # Change is to tthe maximum value
+                variables.game_data["player"]["satiety"] = variables.game_data["player"]["max satiety"]
+            elif variables.game_data["player"]["hydratation"] > variables.game_data["player"]["max hydratation"]:
+                # Max hydratation is above max
+                # Change is to tthe maximum value
+                variables.game_data["player"]["hydratation"] = variables.game_data["player"]["max hydratation"]
             # Reduce uses by 1
             variables.game_data["inventory"][item_number]["uses"] -= 1
             # Refresh the screen
@@ -188,7 +212,7 @@ def inventory_cleaner():
 # take an item
 def take_item(item_name):
     """
-        Let the player take the item.
+        Let the player take the item from a stash
     """
 
     # Search for an empty slot
@@ -226,8 +250,8 @@ def refill_item(item_name):
         tiles_check.append(variables.island_map[variables.game_data["player"]["position"][0]+1][variables.game_data["player"]["position"][1]+1])
         if "~" in tiles_check:
             # A river is found around the player
-            # Set the number of uses back to 5
-            variables.game_data["inventory"]["item_0"]["uses"] = 5
+            # Set the number of uses back to max
+            variables.game_data["inventory"]["item_0"]["uses"] = variables.game_data["inventory"]["item_0"]["max uses"]
             # Print success message
             print(items_data["Water bottle"]["refill message"])
         else:
@@ -240,7 +264,7 @@ def refill_item(item_name):
 # Drop an item
 def drop_item(item_name, player_choice):
     """
-        Let the player drop the item.
+        Let the player drop the item, add it to the monkey chest list
     """
 
     # Check if the item is dropable
@@ -249,6 +273,8 @@ def drop_item(item_name, player_choice):
         # If the item actions drop is False
         print("\t\t\t\u001b[38;5;196mYou can't drop that !\u001b[0m")
     else:
+        # Add the item to the monkey chest
+        variables.game_data["Monkey chest"].append(variables.game_data["inventory"][player_choice]["name"])
         # The item is dropable, drop it
         variables.game_data["inventory"][player_choice]["name"] = None
         variables.game_data["inventory"][player_choice]["uses"] = None
@@ -271,7 +297,7 @@ def random_stashes():
         # Change the position from every stash
         variables.game_data["Item stash"][f"item_stash_{i+1}"]["position"] = pos[i]
         # Add the item to the stash using a random with weights
-        variables.game_data["Item stash"][f"item_stash_{i+1}"]["items"] = random.choices(random_item_name, weights=(30,30,5,5,25,5))
+        variables.game_data["Item stash"][f"item_stash_{i+1}"]["items"] = "".join(random.choices(random_item_name, weights=(30,30,5,5,25,5)))
         # Change the map tile
         variables.island_map[variables.game_data["Item stash"][f"item_stash_{i+1}"]["position"][0]][variables.game_data["Item stash"][f"item_stash_{i+1}"]["position"][1]] = "¤"
 
@@ -380,8 +406,8 @@ items_data = {
                                                     "refill"    : False,    # Can the item refill
                                                 },
                                     "uses" : 1,     # Number of use
-                                    "use" : ["satiety", 20],     # What actions the item do on use (+20 satiety)
-                                    "message" : "\u001b[38;5;118mThat Avocado was tasty ! (+20 Satiety).\u001b[0m" # What is shown when you use the item
+                                    "use" : ["satiety", 40],     # What actions the item do on use (+40 satiety)
+                                    "message" : "\u001b[38;5;118mThat Avocado was tasty ! (+40 Satiety).\u001b[0m" # What is shown when you use the item
                                 },
                 "Passed Avocado" :
                                 {
@@ -403,9 +429,9 @@ items_data = {
                                                     "drop"      : True,    # Can the item be dropped
                                                     "refill"    : False,    # Can the item refill
                                                 },
-                                    "uses" : 1,     # Number of use
-                                    "use" : ["satiety", 10],     # What actions the item do on use (+10 satiety)
-                                    "message" : "\u001b[38;5;118mThat Banana was so sweet ! (+10 Satiety).\u001b[0m" # What is shown when you use the item
+                                    "uses" : 2,     # Number of use
+                                    "use" : ["satiety", 25],     # What actions the item do on use (+25 satiety)
+                                    "message" : "\u001b[38;5;118mThat Banana was so sweet ! (+25 Satiety).\u001b[0m" # What is shown when you use the item
                                 },
                 "Rotten Banana" :
                                 {
@@ -428,8 +454,8 @@ items_data = {
                                                     "refill"    : False,    # Can the item refill
                                                 },
                                     "uses" : 1,     # Number of use
-                                    "use" : ["hydratation", 10],     # What actions the item do on use (+10 hydratation)
-                                    "message" : "\u001b[38;5;118mThat Coco was refreshing ! (+10 hydratation).\u001b[0m" # What is shown when you use the item
+                                    "use" : ["hydratation", 50],     # What actions the item do on use (+50 hydratation)
+                                    "message" : "\u001b[38;5;118mThat Coco was refreshing ! (+50 hydratation).\u001b[0m" # What is shown when you use the item
                                 },
                 "Empty Coco" :
                                 {

@@ -1,7 +1,7 @@
 # coding: utf-8
 
 # Imports
-
+import sys
 
 # Extra code
 import main_menu as mm
@@ -11,6 +11,9 @@ import toolbox as tb
 import game_data as gdat
 import variables
 import inventory_items as inv
+from sphinx import guess_number
+from ceasar import ceasar_sypher
+import fizzbuzz
 
 # FUNCTIONS
 # Let the player chose where he wants to move
@@ -43,7 +46,7 @@ def player_movement(movement_name):
 # Let the player move North
 def move(player_position, directions):
     """
-        Check if the player can move north and then move him
+        Check if the player can move there and move him to his next position
     """
 
     if directions == "1":
@@ -78,6 +81,12 @@ def move(player_position, directions):
             # Player can move there
             # Change player position
             variables.game_data["player"]["position"][0] += 1
+    if not move_checker(next_pos):
+        # Clear the console and print the map
+        ma.map_printer()
+        print(ma.map_tiles[next_pos][4])
+        # Check if the player is on a tile with an event
+        tile_checker()
     # Clear the console and print the map
     ma.map_printer()
     # Print the move
@@ -97,11 +106,11 @@ def move_checker(next_pos):
         # Increment the movement score
         variables.game_data["player"]["movements counter"]+=1
         # Energy decay
-        variables.game_data["player"]["energy"]-=3
+        variables.game_data["player"]["energy"]+=variables.game_data["player"]["energy decay"]
         # Hydratation decay
-        variables.game_data["player"]["hydratation"]-=2
+        variables.game_data["player"]["hydratation"]+=variables.game_data["player"]["hydratation decay"]
         # Satiety decay
-        variables.game_data["player"]["satiety"]-=2
+        variables.game_data["player"]["satiety"]+=variables.game_data["player"]["satiety decay"]
         # Check if player is alive after the move
         pa.check_vitals()
         # Validate the move
@@ -114,21 +123,53 @@ def tile_checker():
         Check the tile where the player is standing
     """
 
+    # Check if the player as the 3 keys and is on the skull door
+    if variables.game_data["player"]["position"] == ma.map_tiles["∩"][4] and all(variables.game_data['inventory']['keychain']):
+        tb.clear()
+        print("YOU WON THE GAME")
+        sys.exit()
     # Check for the mysterious places tiles
     if variables.game_data["player"]["position"] in ma.map_tiles["φ"][4]:
         # The player position is on a challenge
-        if variables.game_data["player"]["position"] == ma.map_tiles["φ"][4][0]:
+        if variables.game_data["player"]["position"] == ma.map_tiles["φ"][4][0] and not variables.game_data["inventory"]["keychain"][0]:
             # Launch the first challenge
             tb.clear()
-            print("You entered the first Challenge")
-        if variables.game_data["player"]["position"] == ma.map_tiles["φ"][4][1]:
+            first_challenge = guess_number()
+            if first_challenge:
+                # Player won the challenge
+                # Add the key to his inventory
+                variables.game_data["inventory"]["keychain"][0] = True
+                # Change the map tile to the validated challenge tile
+                variables.island_map[ma.map_tiles["φ"][4][0][0]][ma.map_tiles["φ"][4][0][1]] = "√"
+        elif variables.game_data["player"]["position"] == ma.map_tiles["φ"][4][1] and not variables.game_data["inventory"]["keychain"][1]:
             # Launch the second challenge
             tb.clear()
-            print("You entered the second Challenge")
-        if variables.game_data["player"]["position"] == ma.map_tiles["φ"][4][2]:
+            second_challenge = ceasar_sypher()
+            if second_challenge:
+                # Player won the challenge
+                # Add the key to his inventory
+                variables.game_data["inventory"]["keychain"][1] = True
+                # Change the map tile to the validated challenge tile
+                variables.island_map[ma.map_tiles["φ"][4][1][0]][ma.map_tiles["φ"][4][1][1]] = "√"
+        elif variables.game_data["player"]["position"] == ma.map_tiles["φ"][4][2] and not variables.game_data["inventory"]["keychain"][2]:
             # Launch the third challenge
             tb.clear()
-            print("You entered the third Challenge")
+            third_challenge = fizzbuzz.gameflow()
+            if third_challenge:
+                # Player won the challenge
+                # Add the key to his inventory
+                variables.game_data["inventory"]["keychain"][2] = True
+                # Change the map tile to the validated challenge tile
+                variables.island_map[ma.map_tiles["φ"][4][2][0]][ma.map_tiles["φ"][4][2][1]] = "√"
+        # Add one actions to the counter
+        variables.game_data["player"]["actions counter"]+=1
+        # Check if the player has the 3 keys and reveal the skull door
+        ma.map_reveal()
+        # Clear console reprint the map
+        tb.clear()
+        ma.map_printer()
+        # Let the player choose again
+        pa.player_actions("Actions Menu")
     else:
         # The player is on an item stash
         for key in variables.game_data["Item stash"]:

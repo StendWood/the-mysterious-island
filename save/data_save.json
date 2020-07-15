@@ -1,14 +1,20 @@
 {
     "player": {
-        "name": "1",
+        "name": "Alex",
         "position": [
-            25,
-            58
+            23,
+            8
         ],
-        "energy": 97,
-        "hydratation": 98,
-        "satiety": 98,
-        "movements counter": 1,
+        "energy": 94,
+        "max energy": 100,
+        "energy decay": -3,
+        "hydratation": 96,
+        "max hydratation": 100,
+        "hydratation decay": -2,
+        "satiety": 96,
+        "max satiety": 100,
+        "satiety decay": -2,
+        "movements counter": 2,
         "actions counter": 0
     },
     "inventory": {
@@ -20,9 +26,10 @@
         "item_0": {
             "name": "Water bottle",
             "uses": 5,
+            "max uses": 5,
             "use": [
                 "hydratation",
-                20
+                25
             ]
         },
         "item_1": {
@@ -91,44 +98,36 @@
                 10,
                 38
             ],
-            "items": "Avocado"
+            "items": "Coco"
         },
         "item_stash_2": {
             "position": [
-                25,
-                59
-            ],
-            "items": "Passed Avocado"
-        },
-        "item_stash_3": {
-            "position": [
-                6,
-                4
+                28,
+                7
             ],
             "items": "Avocado"
         },
+        "item_stash_3": {
+            "position": [
+                2,
+                38
+            ],
+            "items": "Coco"
+        },
         "item_stash_4": {
             "position": [
-                13,
-                62
+                16,
+                51
             ],
-            "items": "Passed Avocado"
+            "items": "Rotten Banana"
         },
         "item_stash_5": {
             "position": [
                 27,
                 28
             ],
-            "items": "Empty Coco"
+            "items": "Banana"
         }
     },
-    "Item drop": {
-        "drop_1": {
-            "position": [
-                0,
-                0
-            ],
-            "items": []
-        }
-    }
+    "Monkey chest": []
 }

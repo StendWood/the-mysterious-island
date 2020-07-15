@@ -51,7 +51,7 @@ def rules_stories():
     print(f"\tYou'll need to find your way to three \033[91mMysterious Places\033[00m.")
     print("\tThree keys you must find and win : ")
     print("\t\t\t\tthe \u001b[38;5;136mBronze Key\u001b[0m,")   # Bronze colored text \u001b[38;5;136m
-    print("\t\t\t\tthe \u001b[38;5;250mSilver Key\u001b[0m,")   # Silver colored text \u001b[38;5;250m
+    print("\t\t\t\tthe \u001b[38;5;252mSilver Key\u001b[0m,")   # Silver colored text \u001b[38;5;250m
     print("\t\t\t\tthe \u001b[38;5;220mGolden Key\u001b[0m\n")  # Gold colored text \u001b[38;5;220m
     print("\tIn your quest do not neglect yourself, you'll need to \u001b[38;5;15mSLEEP\u001b[0m, \u001b[38;5;118mEAT\u001b[0m and \u001b[38;5;75mDRINK\u001b[0m.")
     print("\tOr you'll \u001b[38;5;196mDIE\u001b[0m.")  # Red colored text \u001b[38;5;196m

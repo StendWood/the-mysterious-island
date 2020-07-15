@@ -2,7 +2,6 @@
 
 # Imports
 import random
-import toolbox as tb
 import sys
 
 # Extra code
@@ -10,6 +9,7 @@ import variables
 import game_data as gdat
 import leaderboard as lb
 import map_admin as ma
+import toolbox as tb
 
 # FUNCTIONS
 # Show the welcome screen
@@ -21,8 +21,8 @@ def welcome_screen():
     # Clear the console
     tb.clear()
     # Welcome Ascii art
-    print("\n▀█▀ █░█ █▀▀   █▀▄▀█ █▄█ █▀ ▀█▀ █▀▀ █▀█ █ █▀█ █░█ █▀   █ █▀ █░░ ▄▀█ █▄░█ █▀▄")
-    print("░█░ █▀█ ██▄   █░▀░█ ░█░ ▄█ ░█░ ██▄ █▀▄ █ █▄█ █▄█ ▄█   █ ▄█ █▄▄ █▀█ █░▀█ █▄▀\n")
+    print("\n ▀█▀ █░█ █▀▀   █▀▄▀█ █▄█ █▀ ▀█▀ █▀▀ █▀█ █ █▀█ █░█ █▀   █ █▀ █░░ ▄▀█ █▄░█ █▀▄")
+    print(" ░█░ █▀█ ██▄   █░▀░█ ░█░ ▄█ ░█░ ██▄ █▀▄ █ █▄█ █▄█ ▄█   █ ▄█ █▄▄ █▀█ █░▀█ █▄▀\n")
 
 # Menu
 def main_menu_chooser():

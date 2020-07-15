@@ -65,9 +65,9 @@ def player_sleep():
     variables.game_data["player"]["actions counter"]+=1
     # Energy regeneration
     variables.game_data["player"]["energy"] += (6 * int(sleep_time))
-    if variables.game_data["player"]["energy"] > 100:
+    if variables.game_data["player"]["energy"] > variables.game_data["player"]["max energy"]:
         # If energy over 100 set it back to 100
-        variables.game_data["player"]["energy"] = 100
+        variables.game_data["player"]["energy"] = variables.game_data["player"]["max energy"]
     # Hydratation decay
     variables.game_data["player"]["hydratation"] -= (2 * int(sleep_time))
     # Satiety decay

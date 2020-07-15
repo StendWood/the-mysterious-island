@@ -11,11 +11,17 @@ island_map = []
 game_data = {
                 "player" : 
                             {
-                                "name" : "",
+                                "name" : "John Doe",
                                 "position" : [26, 58],
                                 "energy" : 100,
+                                "max energy" : 100,
+                                "energy decay" : -3,
                                 "hydratation" : 100,
+                                "max hydratation" : 100,
+                                "hydratation decay" : -2,
                                 "satiety" : 100,
+                                "max satiety" : 100,
+                                "satiety decay" : -2,
                                 "movements counter" : 0,
                                 "actions counter" : 0,
                             },
@@ -31,7 +37,8 @@ game_data = {
                                                 {
                                                     "name" : "Water bottle",
                                                     "uses" : 5,     # Number of use
-                                                    "use" : ["hydratation", 20],     # What actions the item do on use (+20 hydratation)
+                                                    "max uses" : 5,
+                                                    "use" : ["hydratation", 25],     # What actions the item do on use (+20 hydratation)
                                                 },
                                     "item_1" : 
                                                 {
@@ -59,9 +66,9 @@ game_data = {
                                                     "use" : None,     # What actions the item do on use
                                                 },
                                     "item_6" : {
-                                                    "name" : "Banana",
-                                                    "uses" : 2,     # Number of use
-                                                    "use" : ["satiety", 5],     # What actions the item do on use
+                                                    "name" : None,
+                                                    "uses" : None,     # Number of use
+                                                    "use" : None,     # What actions the item do on use
                                                 },
                                     "item_7" : {
                                                     "name" : None,
@@ -69,9 +76,9 @@ game_data = {
                                                     "use" : None,     # What actions the item do on use
                                                 },
                                     "item_8" : {
-                                                    "name" : "Banana",
-                                                    "uses" : 2,     # Number of use
-                                                    "use" : ["satiety", 5],     # What actions the item do on use
+                                                    "name" : None,
+                                                    "uses" : None,     # Number of use
+                                                    "use" : None,     # What actions the item do on use
                                                 },
                                     "item_9" : {
                                                     "name" : None,
@@ -84,27 +91,31 @@ game_data = {
                                     "item_stash_1" : 
                                                         {
                                                             "position" : [],
-                                                            "items" : [],
+                                                            "items" : "",
                                                         },
                                     "item_stash_2" : 
                                                         {
                                                             "position" : [],
-                                                            "items" : [],
+                                                            "items" : "",
                                                         },
                                     "item_stash_3" : 
                                                         {
                                                             "position" : [],
-                                                            "items" : [],
+                                                            "items" : "",
                                                         },
                                     "item_stash_4" : 
                                                         {
                                                             "position" : [],
-                                                            "items" : [],
+                                                            "items" : "",
                                                         },
                                     "item_stash_5" : 
                                                         {
                                                             "position" : [],
-                                                            "items" : [],
+                                                            "items" : "",
                                                         },
                                 },
+                "Monkey chest" :
+                                [
+
+                                ]
 }

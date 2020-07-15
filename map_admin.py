@@ -2,6 +2,7 @@
 
 # Imports
 import random
+from time import sleep
 
 # Extra code
 import variables
@@ -133,9 +134,24 @@ def map_reveal():
     """
         Reveal the Skull Door and let the player pass through
     """
-    # Si nombre de keys = 3
-    variables.island_map[1][21] = "∩"
-    variables.island_map[2][96] = "Skull Door"
+
+    if all(variables.game_data['inventory']['keychain']):
+        # Player has all the keys
+        # Reveal the end game door tile
+        variables.island_map[1][21] = "∩"
+        # Change the ∩ info in the status print
+        variables.island_map[2][96] = "Skull Door"
+        tb.clear()
+        # 3 keys ASCII Art and story
+        print("      _   ")
+        print("     ( )   _")
+        print("      T   ( )            As you reach for the last key,")
+        print(" _    |    T             you hear a noise in the distance,")
+        print("( )   |E   |             the ground is shaking,")
+        print(" T         |E            something big is in motion...")
+        print(" |")
+        print(" |E")
+        sleep(5)
 
 # Save the map
 def save_map():
@@ -157,14 +173,16 @@ map_tiles = {
                                 "Mountain",    #  0 - Name
                                 False,  # 1 - If player can pass through
                                 "\u001b[38;5;102m",  # 2 - Color of the symbol
-                                "\u001b[0m"         # 3 - Reset color
+                                "\u001b[0m",         # 3 - Reset color
+                                "\n\t\tYou can't move past a mountain !"    # 4 Error message
                             ],
                 "↑" :
                             [
                                 "Trees",    # 0 - Name
                                 False,  # 1 - If player can pass through
                                 "\u001b[38;5;64m",  # 2 - Color of the symbol
-                                "\u001b[0m"         # 3 - Reset color
+                                "\u001b[0m",         # 3 - Reset color
+                                "\n\t\t A tree is blocking your path !"    # 4 Error message
                             ],
                 "|" :
                             [
@@ -172,27 +190,31 @@ map_tiles = {
                                 False,  # 1 - If player can pass through
                                 "",  # 2 - Color of the symbol
                                 "",         # 3 - Reset color
+                                "\n\t\tThe current is too much in the ocean !"    # 4 Error message
                             ],
                 "_" :
                             [
                                 "Shoreline",    # 0 - Name
                                 False,  # 1 - If player can pass through
                                 "",  # 2 - Color of the symbol
-                                ""         # 3 - Reset color
+                                "",         # 3 - Reset color
+                                "\n\t\tThe current is too much in the ocean !"    # 4 Error message
                             ],
                 "▓" :
                             [
                                 "Sea",    # 0 - Name
                                 False,  # 1 - If player can pass through
                                 "\u001b[38;5;20m",  # 2 - Color of the symbol
-                                "\u001b[0m"         # 3 - Reset color
+                                "\u001b[0m",         # 3 - Reset color
+                                "\n\t\tThe current is too much in the ocean !"    # 4 Error message
                             ],
                 "~" :
                             [
                                 "River",    # 0 - Name
                                 False,  # 1 - If player can pass through
                                 "\u001b[38;5;117m",  # 2 - Color of the symbol
-                                "\u001b[0m"         # 3 - Reset color
+                                "\u001b[0m",         # 3 - Reset color
+                                "\n\t\tThe water is too cold ! Brrrrrrr !"        # 4 Error message
                             ],
                 "φ" :
                             [
@@ -201,17 +223,17 @@ map_tiles = {
                                 "\u001b[38;5;88m",  # 2 - Color of the symbol
                                 "\u001b[0m",         # 3 - Reset color
                                 (      # 4 - Position tuple
-                                    [27, 42],   # 0 - Position of the first challenge
-                                    [24, 8],    # 1 - Position of the second challenge
-                                    [5, 64]     # 2 - Position of the third challenge
+                                    [4, 64],   # 0 - Position of the first challenge
+                                    [27, 42],    # 1 - Position of the second challenge
+                                    [24, 8]# 2 - Position of the third challenge
                                 ),
                             ],
                 "√" :
                             [
                                 "Mysteries Solved",    # 0 - Symbol
                                 True,  # 1 - If player can pass through
-                                "",  # 2 - Color of the symbol
-                                "",         # 3 - Reset color
+                                "\u001b[38;5;118m",  # 2 - Color of the symbol
+                                "\u001b[0m",         # 3 - Reset color
                             ],
                 "¤" :
                             [
@@ -234,6 +256,9 @@ map_tiles = {
                                 True,  # 1 - If player can pass through
                                 "\u001b[38;5;255m",  # 2 - Color of the symbol
                                 "\u001b[0m",         # 3 - Reset color
+                                (      # 4 - Position tuple
+                                    [1, 21]
+                                )
                             ],
                 " " :
                             [
