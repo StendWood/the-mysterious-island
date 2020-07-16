@@ -34,7 +34,14 @@ def main_menu_chooser():
     print("\t\t\t1 - New Game")
     print("\t\t\t2 - Load Game")
     print("\t\t\t3 - Leaderboard")
-    print("\t\t\t4 - Quit\n")
+    print("\t\t\t4 - Historic")
+    print("\t\t\t5 - Quit\n")
+
+    # Load the historic
+    lb.load_historic()
+    # Load the leaderboard
+    lb.load_leaderboard()
+
     # Check the player choice
     player_choice = menu_choice("Main Menu")
     if player_choice == "1":
@@ -46,6 +53,9 @@ def main_menu_chooser():
     elif player_choice == "3":
         # Show the leaderboard
         lb.leaderboard()
+    elif player_choice == "4":
+        # Show the historic
+        lb.historic()
     else:
         # Quit the game
         sys.exit()

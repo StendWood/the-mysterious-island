@@ -14,6 +14,7 @@ import inventory_items as inv
 from sphinx import guess_number
 from ceasar import ceasar_sypher
 import fizzbuzz
+import leaderboard as lb
 
 # FUNCTIONS
 # Let the player chose where he wants to move
@@ -125,6 +126,15 @@ def tile_checker():
 
     # Check if the player as the 3 keys and is on the skull door
     if variables.game_data["player"]["position"] == ma.map_tiles["∩"][4] and all(variables.game_data['inventory']['keychain']):
+        # Save the score
+        pass
+        # Save the historic
+        lb.add_historic(True)
+        lb.save_historic()
+        # Save leaderboard
+        lb.add_score()
+        lb.save_leaderboard()
+        # Clear console and ASCII Art
         tb.clear()
         print("YOU WON THE GAME")
         sys.exit()
@@ -139,6 +149,8 @@ def tile_checker():
                 # Player won the challenge
                 # Add the key to his inventory
                 variables.game_data["inventory"]["keychain"][0] = True
+                # Add 100 to the score
+                variables.game_data["score"]+=500
                 # Change the map tile to the validated challenge tile
                 variables.island_map[ma.map_tiles["φ"][4][0][0]][ma.map_tiles["φ"][4][0][1]] = "√"
         elif variables.game_data["player"]["position"] == ma.map_tiles["φ"][4][1] and not variables.game_data["inventory"]["keychain"][1]:
@@ -149,6 +161,8 @@ def tile_checker():
                 # Player won the challenge
                 # Add the key to his inventory
                 variables.game_data["inventory"]["keychain"][1] = True
+                # Add 100 to the score
+                variables.game_data["score"]+=500
                 # Change the map tile to the validated challenge tile
                 variables.island_map[ma.map_tiles["φ"][4][1][0]][ma.map_tiles["φ"][4][1][1]] = "√"
         elif variables.game_data["player"]["position"] == ma.map_tiles["φ"][4][2] and not variables.game_data["inventory"]["keychain"][2]:
@@ -159,10 +173,24 @@ def tile_checker():
                 # Player won the challenge
                 # Add the key to his inventory
                 variables.game_data["inventory"]["keychain"][2] = True
+                # Add 100 to the score
+                variables.game_data["score"]+=500
                 # Change the map tile to the validated challenge tile
                 variables.island_map[ma.map_tiles["φ"][4][2][0]][ma.map_tiles["φ"][4][2][1]] = "√"
+                variables.island_map[24][10] = "φ"
+                variables.game_data["Monkey chest"]["position"] = [24, 10]
         # Add one actions to the counter
         variables.game_data["player"]["actions counter"]+=1
+        # Check if the player has the 3 keys and reveal the skull door
+        ma.map_reveal()
+        # Clear console reprint the map
+        tb.clear()
+        ma.map_printer()
+        # Let the player choose again
+        pa.player_actions("Actions Menu")
+    elif variables.game_data["player"]["position"] == variables.game_data["Monkey chest"]["position"]:
+        # Check if the player is on the monkey chest
+        inv.monkey_chest()
         # Check if the player has the 3 keys and reveal the skull door
         ma.map_reveal()
         # Clear console reprint the map

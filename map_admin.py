@@ -287,7 +287,7 @@ map_tiles = {
 menu_data = {
                 "Main Menu" : # Menu Name
                                 [
-                                    "1234"      # Possible inputs
+                                    "12345"      # Possible inputs
                                 ],
                 "Actions Menu" :
                                 [

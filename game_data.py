@@ -4,12 +4,14 @@
 import json
 import os
 from time import sleep
+import time
 
 # Extra code
 import variables
 import toolbox as tb
 import main_menu as mm
 import map_admin as ma
+import leaderboard as lb
 
 # FUNCTIONS
 # Player chose New Game in the main menu
@@ -18,6 +20,8 @@ def new_game():
         Start a new game
     """
 
+    # Get the starting time
+    variables.time_data["start time"] = round(time.time())
     # Reprint the welcome screen
     mm.welcome_screen()
     # Adk player name
@@ -37,6 +41,10 @@ def load_game():
         ma.saved_map()
         # Load Saved data
         load_data()
+        # Load the historic
+        lb.load_historic()
+        # Get the starting time
+        variables.time_data["start time"] = round(time.time())
     else:
         # Save fil doesn't exist
         print("\n\t\t\tNo save file")
@@ -54,6 +62,10 @@ def save_game():
 
     # Delete any save file
     save_cleaner()
+    # Get the end time
+    variables.time_data["end time"] = round(time.time())
+    # Calculate the total duration
+    variables.game_data["duration"] += tb.duration()
     # Save the map
     ma.save_map()
     # Save the data

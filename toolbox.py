@@ -3,6 +3,7 @@
 # Imports
 import os
 import sys
+from datetime import datetime
 
 # Extra code
 import variables
@@ -22,6 +23,7 @@ def clear():
     elif "linux" in sys.platform.lower():
         os.system("clear")
 
+
 def ask_player_name():
     """
         Ask the name of the player
@@ -31,9 +33,11 @@ def ask_player_name():
     mm.welcome_screen()
     # Ask the player name
     variables.game_data["player"]["name"] = input("What's you name fellow adventurer ? ")
+
     while variables.game_data["player"]["name"] == "":
         # If the player name is empty ask again
         variables.game_data["player"]["name"] = input("Lost your tongue ? ")
+
 
 # Rules and story
 def rules_stories():
@@ -58,9 +62,11 @@ def rules_stories():
     print("\tEvery step will drain your \u001b[38;5;11mENERGY\u001b[0m, \u001b[38;5;118mSATIETY\u001b[0m and \u001b[38;5;75mHYDRATATION\u001b[0m.")
     print("\tUse your wits to overcome the challenges ahead.\n")
     print("\tI wish you good luck.\n")
+
     # Let the player continue
     input("\t\t\t\t\tPress Enter to continue")
     clear()
+
 
 # Death art
 def death_art():
@@ -92,3 +98,12 @@ def death_art():
     print(" `:::::`::::::::::::;'`:;::#                O")
     print("  `:::::`::::::::;' /  / `:#")
     print("   ::::::`:::::;'  /  /   `#\n")
+
+
+def duration():
+    """
+        Calculate the duration of the game
+    """
+
+    duration = variables.time_data["end time"] - variables.time_data["start time"]
+    return duration

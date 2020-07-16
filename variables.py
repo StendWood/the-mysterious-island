@@ -9,6 +9,8 @@ island_map = []
 # VARIABLES
 # Game Data
 game_data = {
+                "duration" : 0,
+                "score" : 0,
                 "player" : 
                             {
                                 "name" : "John Doe",
@@ -53,12 +55,12 @@ game_data = {
                                     "item_3" : {
                                                     "name" : "Laptop",
                                                     "uses" : 1,     # Number of use
-                                                    "use" : ["energy", 5],     # What actions the item do on use (+5 energy)
+                                                    "use" : ["energy", 10],     # What actions the item do on use (+10 energy)
                                                 },
                                     "item_4" : {
                                                     "name" : "Solar panel",
                                                     "uses" : 1,     # Number of use
-                                                    "use" : ["energy", 5],     # What actions the item do on use (+5 energy)
+                                                    "use" : ["energy", 10],     # What actions the item do on use (+10 energy)
                                                 },
                                     "item_5" : {
                                                     "name" : None,
@@ -115,7 +117,24 @@ game_data = {
                                                         },
                                 },
                 "Monkey chest" :
-                                [
+                                {
+                                    "position" : None,
+                                    "items" : []
+                                },
+}
 
-                                ]
+# Historic data
+historic_data = [
+                    
+]
+
+# Leaderboard data
+leaderboard_data = [
+                    
+]
+
+# Time data
+time_data = {
+                "start time" : "",
+                "end time"   : ""
 }

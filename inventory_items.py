@@ -274,7 +274,7 @@ def drop_item(item_name, player_choice):
         print("\t\t\t\u001b[38;5;196mYou can't drop that !\u001b[0m")
     else:
         # Add the item to the monkey chest
-        variables.game_data["Monkey chest"].append(variables.game_data["inventory"][player_choice]["name"])
+        variables.game_data["Monkey chest"]["items"].append(variables.game_data["inventory"][player_choice]["name"])
         # The item is dropable, drop it
         variables.game_data["inventory"][player_choice]["name"] = None
         variables.game_data["inventory"][player_choice]["uses"] = None
@@ -338,6 +338,41 @@ def show_stash(key, key_2, item_name):
         pa.player_actions("Actions Menu")
 
 
+def monkey_chest():
+    """
+        Show the monkey chest items, same as the show_stash function for item stash
+    """
+
+    # ASCII Art
+    print("\n\u001b[38;5;255m __________")
+    print("/\\_________\\")
+    print("| /         /")
+    print("`...........")
+    print("|\\         \\")
+    print(f"| |---------|")
+    print("\\ | MONKEYS |")
+    print(" \\|_________|\u001b[0m\n")
+    # Show the item list
+    counter = 1
+    if len(variables.game_data["Monkey chest"]["items"]) == 0:
+        print("There is nothing is that chest but monkey hair !")
+        sleep(3)
+        return
+    for item in variables.game_data["Monkey chest"]["items"]:
+        print(f"{counter} - {item}")
+    choice = input("What do you want to take ? ")
+    while not choice.isalnum() or len(choice) > 1:
+        choice = input("What do you want to take ? Choose an item or Press Q to leave")
+    if choice.upper() == "Q":
+        return
+    else:
+        try:
+            take_item(variables.game_data["Monkey chest"]["items"][int(choice) - 1])
+            variables.game_data["Monkey chest"]["items"].pop(int(choice) - 1)
+        except:
+            pass
+
+
 # VARIABLES
 # Items list
 items_data = {
@@ -350,7 +385,7 @@ items_data = {
                                                     "drop"      : False,    # Can the item be dropped
                                                     "refill"    : True,     # Can the item refill
                                                 },
-                                    "message" : "\u001b[38;5;45mYou take a sip and feel refreshed ! (+20 Hydratation)\u001b[0m", # What is shown when you use the item
+                                    "message" : "\u001b[38;5;45mYou take a sip and feel refreshed ! (+25 Hydratation)\u001b[0m", # What is shown when you use the item
                                     "error message" : "\u001b[38;5;196mYour bottle is empty\u001b[38;5;0m", # What is shown when you can't use the item
                                     "refill message" : "\u001b[38;5;45mYour bottle is now back to full with fresh and clean water !\u001b[0m",
                                     "refill error" : "\u001b[38;5;196mYou can't find any water around you !\u001b[0m",
@@ -382,7 +417,7 @@ items_data = {
                                                     "drop"      : False,    # Can the item be dropped
                                                     "refill"    : False,    # Can the item refill
                                                 },
-                                    "message" : "\u001b[38;5;11mYou watched a motivationnal video (+5 Energy).\u001b[0m", # What is shown when you use the item
+                                    "message" : "\u001b[38;5;11mYou watched a motivationnal video (+10 Energy).\u001b[0m", # What is shown when you use the item
                                     "error message" : "\u001b[38;5;196mYoubrokethespacebaronthekeyboard!\u001b[0m" # What is shown when can't use the item
                                 },
                 "Solar panel" :
@@ -393,7 +428,7 @@ items_data = {
                                                     "drop"      : False,    # Can the item be dropped
                                                     "refill"    : False,    # Can the item refill
                                                 },
-                                    "message" : "\u001b[38;5;11mYou charged yourself. Are you even human ? (+5 Energy).\u001b[0m", # What is shown when you use the item
+                                    "message" : "\u001b[38;5;11mYou charged yourself. Are you even human ? (+10 Energy).\u001b[0m", # What is shown when you use the item
                                     "error message" : "\u001b[38;5;196mYou electrocuted yourself !\u001b[0m" # What is shown when can't use the item
                                 },
                 # Items you can find on the map
