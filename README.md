@@ -77,6 +77,7 @@ Mysterious places:
 
 
 Technical specs:
+
     - PEP8 and DRY
     - English funtions and variables names
     - Commented code and doctring in function
