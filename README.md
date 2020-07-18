@@ -102,4 +102,79 @@ Folders/Files Architecture:
                                 - sypher()
                                 - desypher()
                 - fizzbuzz.py :
-                                -
+                                - fizz_buzz()
+                                    - fizz_buzz_printer()
+                                - gameflow()
+                                - counter_changer()
+                - game_data.py :
+                                - new_game()
+                                - load_game()
+                                - save_game()
+                                - save_cleaner()
+                                - save_data()
+                                - load_data()
+                - inventory_items.py :
+                                - inv_show()
+                                - inventory_choices()
+                                - use_item()
+                                - inventory_cleaner()
+                                - take_item()
+                                - refill_item()
+                                - drop_item()
+                                - random_stashes()
+                                - show_stash()
+                                - monkey_chest()
+                                - items_data{}
+                                - random_item_name[]
+                                - item_stashes_position[]
+                - leaderboard.py :
+                                - leaderboard()
+                                - historic()
+                                - add_score()
+                                - add_historic()
+                                - save_historic()
+                                - load_historic()
+                                - save_leaderboard()
+                                - load_leaderboard()
+                - main.py :
+                                - adventure()
+                - main_menu.py :
+                                - welcome_screen()
+                                - main_menu_chooser()
+                                - menu_choice()
+                                - main_menu()
+                - map_admin.py :
+                                - new_map()
+                                - saved_map()
+                                - map_printer()
+                                - inventory_map_printer()
+                                - status_counter_init()
+                                - status_counter_reset()
+                                - map_reveal()
+                                - save_map()
+                                - map_tiles{}
+                                - menu_data{}
+                - player_actions.py :
+                                - player_actions()
+                                - player_sleep()
+                                - check_vitals()
+                - player_move.py :
+                                - player_movement()
+                                - move()
+                                - move_checker()
+                                - tile_checker()
+                - sphinx.py :
+                                - guess_number()
+                                    - sphinx_printer()
+                - toolbox.py :
+                                - clear()
+                                - ask_player_name()
+                                - rules_stories()
+                                - death_art()
+                                - duration()
+                - variables.py :
+                                - island_map[]
+                                - game_data{}
+                                - historic_data[]
+                                - leaderboard_data[]
+                                - time_data{}
