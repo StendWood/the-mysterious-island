@@ -115,6 +115,21 @@ game_data = {
                                                             "position" : [],
                                                             "items" : "",
                                                         },
+                                    "item_stash_6" : 
+                                                        {
+                                                            "position" : [],
+                                                            "items" : "",
+                                                        },
+                                    "item_stash_7" : 
+                                                        {
+                                                            "position" : [],
+                                                            "items" : "",
+                                                        },
+                                    "item_stash_8" : 
+                                                        {
+                                                            "position" : [],
+                                                            "items" : "",
+                                                        },
                                 },
                 "Monkey chest" :
                                 {

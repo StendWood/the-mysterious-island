@@ -62,7 +62,7 @@ def fizz_buzz():
             if "chief" in who_is_playing:
                 # If the chief is playing
                 if random.randint(0, 100) < game_data["Monkey chief"]:
-                    # The random number is in the Chief chance to say the right answer
+                    # The random number is in the Chief chances to say the right answer
                     # Print the right answer using the function
                     print(f"\t{who_is_playing} said {counter_changer(counter)}")
                     counter+=1
@@ -76,7 +76,7 @@ def fizz_buzz():
             elif who_is_playing == variables.game_data["player"]["name"]:
                 # The main protagonist is playing
                 if random.randint(0, 100) < game_data[variables.game_data["player"]["name"]]:
-                    # The random number is in the main protagonist chance to say the right answer
+                    # The random number is in the main protagonist chances to say the right answer
                     # Print the right answer using the function
                     print(f"\t{who_is_playing} said {counter_changer(counter)}")
                     sleep(0.5)

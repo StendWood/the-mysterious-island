@@ -54,7 +54,9 @@ def move(player_position, directions):
         # The player chose to move NORTH
         # Save the symbol of the next position
         next_pos = variables.island_map[player_position[0] - 1][player_position[1]]
-        if move_checker(next_pos):
+        # Check if player can move there
+        move_check = move_checker(next_pos)
+        if move_check:
             # Player can move there
             # Change player position
             variables.game_data["player"]["position"][0] -= 1
@@ -62,7 +64,9 @@ def move(player_position, directions):
         # The player chose to move WEST
         # Save the symbol of the next position
         next_pos = variables.island_map[player_position[0]][player_position[1] - 1]
-        if move_checker(next_pos):
+        # Check if player can move there
+        move_check = move_checker(next_pos)
+        if move_check:
             # Player can move there
             # Change player position
             variables.game_data["player"]["position"][1] -= 1
@@ -70,7 +74,9 @@ def move(player_position, directions):
         # The player chose to move EAST
         # Save the symbol of the next position
         next_pos = variables.island_map[player_position[0]][player_position[1] + 1]
-        if move_checker(next_pos):
+        # Check if player can move there
+        move_check = move_checker(next_pos)
+        if move_check:
             # Player can move there
             # Change player position
             variables.game_data["player"]["position"][1] += 1
@@ -78,11 +84,13 @@ def move(player_position, directions):
         # The player chose to move SOUTH
         # Save the symbol of the next position
         next_pos = variables.island_map[player_position[0] + 1][player_position[1]]
-        if move_checker(next_pos):
+        # Check if player can move there
+        move_check = move_checker(next_pos)
+        if move_check:
             # Player can move there
             # Change player position
             variables.game_data["player"]["position"][0] += 1
-    if not move_checker(next_pos):
+    if not move_check:
         # Clear the console and print the map
         ma.map_printer()
         print(ma.map_tiles[next_pos][4])
@@ -126,8 +134,6 @@ def tile_checker():
 
     # Check if the player as the 3 keys and is on the skull door
     if variables.game_data["player"]["position"] == ma.map_tiles["∩"][4] and all(variables.game_data['inventory']['keychain']):
-        # Save the score
-        pass
         # Save the historic
         lb.add_historic(True)
         lb.save_historic()
@@ -136,7 +142,20 @@ def tile_checker():
         lb.save_leaderboard()
         # Clear console and ASCII Art
         tb.clear()
-        print("YOU WON THE GAME")
+        print("             .-----.----.-----.")
+        print("            / /-.| |////| |.-\\ \\")
+        print("           / /|_|| |////| ||_|\\ \\")
+        print("          /  :   : |////| :   :  \\")
+        print("         /  /___:  |////|  :___\\  \\")
+        print("        /   :   |_ |////| _|   :___\\")
+        print("       /   /    |_||////||_|    \\   \\")
+        print("      /    :    |_||////||_|    :    \\")
+        print("     /____/____ |_||////||_| ____\\____\\")
+        print("    /     : _  |   |////|   |  _ :     \\")
+        print("   /     / ( ) | _ |////| _ | ( ) \\     \\")
+        print("   \\     :  |  || ||////|| ||  |  :     /")
+        print("    \\   /    .'-\\ ||////|| /-`.    \\   /")
+        print("-----'-'---------'-'----'-'---------'-'------")
         sys.exit()
     # Check for the mysterious places tiles
     if variables.game_data["player"]["position"] in ma.map_tiles["φ"][4]:

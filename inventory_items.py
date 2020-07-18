@@ -291,9 +291,9 @@ def random_stashes():
     """
 
     # Choose 5 position at random in the possible positions
-    pos = random.sample(items_stashes_position, k=5)
+    pos = random.sample(items_stashes_position, k=8)
     # Add the position and item in the stash
-    for i in range(5):
+    for i in range(8):
         # Change the position from every stash
         variables.game_data["Item stash"][f"item_stash_{i+1}"]["position"] = pos[i]
         # Add the item to the stash using a random with weights
@@ -518,5 +518,6 @@ random_item_name = [
 
 # Possible positions for the random stashes
 items_stashes_position = [
-                            [25,59], [16,51], [16,4], [28,7], [6,4], [6,24], [2,38], [14,24], [27,28], [13,62], [10,38]
+                            [16,4], [28,7], [6,4], [6,24], [2,38], [14,24], [27,28], [13,62], [10,38],
+                            [23,41], [22, 45], [13, 35]
 ]

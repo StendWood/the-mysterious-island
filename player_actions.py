@@ -86,8 +86,6 @@ def check_vitals():
     """
 
     if variables.game_data["player"]["energy"] <= 0:
-        # Save the score
-        pass
         # Save in the historic
         lb.add_historic(False, "Exhaustion")
         lb.save_historic()
@@ -98,8 +96,6 @@ def check_vitals():
         # Exit the programm
         sys.exit()
     elif variables.game_data["player"]["hydratation"] <= 0:
-        # Save the score
-        pass
         # Save in the historic
         lb.add_historic(False, "Dehydratation")
         lb.save_historic()
@@ -110,8 +106,6 @@ def check_vitals():
         # Exit the programm
         sys.exit()
     elif variables.game_data["player"]["satiety"] <= 0:
-        # Save the score
-        pass
         # Save in the historic
         lb.add_historic(False, "Starvation")
         lb.save_historic()
