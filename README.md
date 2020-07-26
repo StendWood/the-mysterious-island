@@ -78,11 +78,11 @@ Mysterious places:
 
 Modability:
 
-You can change almost everything by going into variables.
-Energy,max energy,energy decay...
-You can create/change items by adding/changing a line in the inventory_items.py/items_data{} DICT.
-The map is modable, make sure to respect the established symbols or expect several errors or needs to change the code.
-To change the map you just have to modify the maps/map.txt | RESPECT THE SYMBOLS ESTABLISHED |
+    You can change almost everything by going into variables.
+    Energy,max energy,energy decay...
+    You can create/change items by adding/changing a line in the inventory_items.py/items_data{} DICT.
+    The map is modable, make sure to respect the established symbols or expect several errors or needs to change the code.
+    To change the map you just have to modify the maps/map.txt | RESPECT THE SYMBOLS ESTABLISHED |
 
 
 
