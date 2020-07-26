@@ -7,7 +7,6 @@ from time import sleep
 # Extra code
 import  variables
 import toolbox as tb
-import map_admin as ma
 
 # FUNCTIONS
 # The Fizz Buzz is launched nothing can stop it
@@ -136,7 +135,7 @@ def gameflow():
     print("| /         /")
     print("`...........")
     print("|\\         \\")
-    print(f"| |---------|")
+    print("| |---------|")
     print("\\ | MONKEYS |")
     print(" \\|_________|\u001b[0m")
     print("\nThe monkeys run away screaming : YOU CHEATED YOU CHEATED !\n")
