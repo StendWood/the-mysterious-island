@@ -155,7 +155,8 @@ def tile_checker():
         print("   /     / ( ) | _ |////| _ | ( ) \\     \\")
         print("   \\     :  |  || ||////|| ||  |  :     /")
         print("    \\   /    .'-\\ ||////|| /-`.    \\   /")
-        print("-----'-'---------'-'----'-'---------'-'------")
+        print("-----'-'---------'-'----'-'---------'-'------\n")
+        print("\nYou open the door using the 3 keys, ")
         sys.exit()
     # Check for the mysterious places tiles
     if variables.game_data["player"]["position"] in ma.map_tiles["φ"][4]:
@@ -196,7 +197,7 @@ def tile_checker():
                 variables.game_data["score"]+=500
                 # Change the map tile to the validated challenge tile
                 variables.island_map[ma.map_tiles["φ"][4][2][0]][ma.map_tiles["φ"][4][2][1]] = "√"
-                variables.island_map[24][10] = "φ"
+                variables.island_map[24][10] = "¤"
                 variables.game_data["Monkey chest"]["position"] = [24, 10]
         # Add one actions to the counter
         variables.game_data["player"]["actions counter"]+=1

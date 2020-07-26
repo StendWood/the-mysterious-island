@@ -6,7 +6,6 @@ import json
 
 # Extra Code
 import main_menu as mm
-import toolbox as tb
 import variables
 
 # FUNCTIONS
@@ -109,7 +108,7 @@ def save_historic():
 
     try:
         with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/historic.json", "w") as save_file:
-            save_file.write(json.dumps(variables.historic_data, indent= 4))
+            save_file.write(json.dumps(variables.historic_data, indent=4))
     except:
         pass
 

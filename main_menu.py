@@ -1,11 +1,9 @@
 # coding: utf-8
 
 # Imports
-import random
 import sys
 
 # Extra code
-import variables
 import game_data as gdat
 import leaderboard as lb
 import map_admin as ma

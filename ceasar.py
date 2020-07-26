@@ -41,7 +41,8 @@ def ceasar_sypher():
                 print(f"\nThe current key is : {char}")
         if key == player_name:
             # If the key is the player name with the sypher the player win
-            print("\nYou found your name using the sypher, you won !")
+            print("\nYou found your name using the sypher...")
+            print("You grab the \u001b[38;5;252mSilver Key\u001b[0m, and contiue on your quest...")
             sleep(2)
             return True
         if len(key) > 1:
@@ -104,7 +105,7 @@ def sypher(key, message, sypher_list = ["","a", "b", "c", "d", "e", "f", "g", "h
     return " ".join(result_message)
 
 
-def desypher(key, message, sypher_list = ["","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]):
+def desypher(key, message, sypher_list=["", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]):
     """
         Desypher the message using the input of the player as key.
     """

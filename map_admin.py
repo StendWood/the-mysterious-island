@@ -1,13 +1,11 @@
 # coding: utf-8
 
 # Imports
-import random
 from time import sleep
 
 # Extra code
 import variables
 import toolbox as tb
-import game_data as gdat
 import inventory_items as inv
 
 # FUNCTIONS
@@ -143,18 +141,21 @@ def map_reveal():
         variables.island_map[2][96] = "Skull Door"
         tb.clear()
         # 3 keys ASCII Art and story
-        print("      _   ")
-        print("     ( )   _")
-        print("      T   ( )            As you reach for the last key,")
-        print(" _    |    T             you hear a noise in the distance,")
-        print("( )   |E   |             the ground is shaking,")
-        print(" T         |E            something big is in motion...")
-        print(" |")
-        print(" |E")
+        print("      \u001b[38;5;136m_   ")
+        print("     \u001b[38;5;136m( )   \u001b[38;5;220m_\u001b[0m")
+        print("      \u001b[38;5;136mT   \u001b[38;5;220m( )\u001b[0m            As you reach for the last key,")
+        print(" \u001b[38;5;252m_    \u001b[38;5;136m|    \u001b[38;5;220mT\u001b[0m             you hear a noise in the distance,")
+        print("\u001b[38;5;252m( )   \u001b[38;5;136m|E   \u001b[38;5;220m|\u001b[0m             the ground is shaking,")
+        print(" \u001b[38;5;252mT         \u001b[38;5;220m|E\u001b[0m            something big is in motion...")
+        print(" \u001b[38;5;252m|")
+        print(" \u001b[38;5;252m|E\u001b[0m")
         sleep(5)
 
 # Save the map
 def save_map():
+    """
+        Save the map when the player save his game
+    """
     # Reset the counters and status before saving the map
     status_counter_reset()
     # Modify the save file

@@ -13,7 +13,6 @@ def adventure():
     """
         Principal gameflow
     """
-    
     # Show the main menu
     mm.main_menu()
     # Print the map after the main menu

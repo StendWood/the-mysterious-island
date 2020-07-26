@@ -1,29 +1,29 @@
 {
-    "duration": 29,
-    "score": 0,
+    "duration": 696,
+    "score": 1500,
     "player": {
-        "name": "1",
+        "name": "Edwood",
         "position": [
-            24,
-            50
+            2,
+            21
         ],
-        "energy": 64,
-        "max energy": 100,
+        "energy": 457,
+        "max energy": 1000,
         "energy decay": -3,
-        "hydratation": 76,
-        "max hydratation": 100,
+        "hydratation": 638,
+        "max hydratation": 1000,
         "hydratation decay": -2,
-        "satiety": 76,
-        "max satiety": 100,
+        "satiety": 638,
+        "max satiety": 1000,
         "satiety decay": -2,
-        "movements counter": 12,
-        "actions counter": 0
+        "movements counter": 193,
+        "actions counter": 7
     },
     "inventory": {
         "keychain": [
-            false,
-            false,
-            false
+            true,
+            true,
+            true
         ],
         "item_0": {
             "name": "Water bottle",
@@ -147,7 +147,10 @@
         }
     },
     "Monkey chest": {
-        "position": null,
+        "position": [
+            24,
+            10
+        ],
         "items": []
     }
 }

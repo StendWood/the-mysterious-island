@@ -102,6 +102,6 @@ def guess_number():
                 sleep(2)
     tb.clear()
     sphinx_printer(tries, rounds, historic)
-    print("The Sphinx let the Bronze Key fall on the floor, you move towards it and pick it up !")
+    print("The Sphinx let the \u001b[38;5;136mBronze Key\u001b[0m fall on the floor, you move towards it and pick it up !")
     sleep(3)
     return True
