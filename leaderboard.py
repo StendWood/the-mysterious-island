@@ -107,7 +107,7 @@ def save_historic():
     """
 
     try:
-        with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/historic.json", "w") as save_file:
+        with open("save/historic.json", "w") as save_file:
             save_file.write(json.dumps(variables.historic_data, indent=4))
     except:
         pass
@@ -120,7 +120,7 @@ def load_historic():
     """
 
     try:
-        with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/historic.json", "r") as load_file:
+        with open("save/historic.json", "r") as load_file:
             variables.historic_data = json.loads(load_file.read())
     except:
         pass
@@ -133,7 +133,7 @@ def save_leaderboard():
     """
 
     try:
-        with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/leaderboard.json", "w") as save_file:
+        with open("save/leaderboard.json", "w") as save_file:
             save_file.write(json.dumps(variables.leaderboard_data, indent= 4))
     except:
         pass
@@ -146,7 +146,7 @@ def load_leaderboard():
     """
 
     try:
-        with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/leaderboard.json", "r") as load_file:
+        with open("save/leaderboard.json", "r") as load_file:
             variables.leaderboard_data = json.loads(load_file.read())
     except:
         pass

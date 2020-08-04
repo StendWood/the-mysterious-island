@@ -35,7 +35,7 @@ def new_game():
 # Player chose Load Game in the main menu
 def load_game():
     # Check if the save file exist at that location
-    if os.path.isfile("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/maps/saved_map.txt") and os.path.isfile("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/data_save.json"):
+    if os.path.isfile("maps/saved_map.txt") and os.path.isfile("save/data_save.json"):
         # Save file exist
         # Load saved map
         ma.saved_map()
@@ -80,8 +80,8 @@ def save_cleaner():
 
     try:
         # Delete the previous files if any
-        os.remove("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/maps/saved_map.txt")
-        os.remove("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/data_save.json")
+        os.remove("maps/saved_map.txt")
+        os.remove("save/data_save.json")
     except:
         # No file to delete
         pass
@@ -93,7 +93,7 @@ def save_data():
         Save the game_data DICT into JSON save file.
     """
 
-    with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/data_save.json", "w") as save_file:
+    with open("save/data_save.json", "w") as save_file:
         save_file.write(json.dumps(variables.game_data, indent= 4))
 
 
@@ -103,5 +103,5 @@ def load_data():
         Load the game data DICT from the JSON save file to the game_data variable.
     """
 
-    with open("C:/Users/PYTHON/Documents/GitHub/the-mysterious-island/save/data_save.json", "r") as load_file:
+    with open("save/data_save.json", "r") as load_file:
         variables.game_data = json.loads(load_file.read())
